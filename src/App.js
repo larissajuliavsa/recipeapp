@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import RecipeProvider from './context/RecipeProvider';
 
 function App() {
   return (
@@ -14,6 +15,9 @@ function App() {
       >
         Glass
       </object>
+      <RecipeProvider>
+        <span>Hello, App!</span>
+      </RecipeProvider>
     </div>
   );
 }
