@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from '../components/Header';
 
 function Home() {
   return (
-    <span>Tela Home na rota /foods</span>
+    <>
+      <Header />
+      <span>Tela Home na rota /foods</span>
+    </>
   );
 }
 
