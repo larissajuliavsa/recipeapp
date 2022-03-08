@@ -7,6 +7,8 @@ import RecipeProvider from './context/RecipeProvider';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import Done from './pages/Done';
+import Favorites from './pages/Favorites';
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route exact path="/" render={ (props) => <Login { ...props } /> } />
           <Route path="/foods" component={ Home } />
           <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/done-recipes" component={ Done } />
+          <Route exact path="/favorite-recipes" component={ Favorites } />
         </Switch>
       </RecipeProvider>
     </div>
