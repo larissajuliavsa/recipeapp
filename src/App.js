@@ -1,8 +1,11 @@
 import React from 'react';
 import './App.css';
+import { Route, Switch } from 'react-router';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipeProvider from './context/RecipeProvider';
+import Login from './pages/Login';
+import Home from './pages/Home';
 
 function App() {
   return (
@@ -16,7 +19,11 @@ function App() {
         Glass
       </object>
       <RecipeProvider>
-        <span>Hello, App!</span>
+        <span>Hello Word!</span>
+        <Switch>
+          <Route exact path="/" render={ (props) => <Login { ...props } /> } />
+          <Route path="/foods" component={ Home } />
+        </Switch>
       </RecipeProvider>
     </div>
   );
