@@ -47,7 +47,7 @@ describe('Teste a Tela de Login', () => {
   });
 });
 
-test('o botao "entrar" salva os intens no Local storage e muda a rota', () => {
+test('o botao "entrar" muda a rota', () => {
   const { history } = RenderWithRouter(<App />);
 
   const labelEmail = screen.getByLabelText(/email:/i);
