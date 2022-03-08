@@ -44,7 +44,7 @@ function RecipeProvider({ children }) {
 }
 
 RecipeProvider.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.any).isRequired,
-};
+  children: PropTypes.array,
+}.isRequired;
 
 export default RecipeProvider;
