@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import RecipeProvider from './context/RecipeProvider';
 import Login from './pages/Login';
 import Home from './pages/Home';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Switch>
           <Route exact path="/" render={ (props) => <Login { ...props } /> } />
           <Route path="/foods" component={ Home } />
+          <Route exact path="/profile" component={ Profile } />
         </Switch>
       </RecipeProvider>
     </div>
