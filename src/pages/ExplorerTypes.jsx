@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import {
   getAletorieRecipeDrink,
   getAletorieRecipeFood,
-} from '../service/AletoriesRecipes';
+} from '../services/AletoriesRecipes';
 
 function ExplorerTypes(props) {
   const { history, match } = props;
