@@ -10,6 +10,7 @@ import Profile from './pages/Profile';
 import Done from './pages/Done';
 import Favorites from './pages/Favorites';
 import Explorer from './pages/Explorer';
+import ExplorerTypes from './pages/ExplorerTypes';
 
 function App() {
   return (
@@ -31,6 +32,11 @@ function App() {
           <Route exact path="/done-recipes" component={ Done } />
           <Route exact path="/favorite-recipes" component={ Favorites } />
           <Route exact path="/explore" render={ (props) => <Explorer { ...props } /> } />
+          <Route
+            exact
+            path="/explore/:foodsAndDrinks"
+            render={ (props) => <ExplorerTypes { ...props } /> }
+          />
         </Switch>
       </RecipeProvider>
     </div>
