@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 
 function Explorer({ history }) {
-  const btnExplore = (route) => {
+  const btnRedirectRoute = (route) => {
     history.push(`/explore/${route}`);
   };
 
@@ -13,14 +13,14 @@ function Explorer({ history }) {
       <button
         type="button"
         data-testid="explore-foods"
-        onClick={ () => btnExplore('foods') }
+        onClick={ () => btnRedirectRoute('foods') }
       >
         Explore Foods
       </button>
       <button
         type="button"
         data-testid="explore-drinks"
-        onClick={ () => btnExplore('drinks') }
+        onClick={ () => btnRedirectRoute('drinks') }
       >
         Explore Drinks
       </button>
