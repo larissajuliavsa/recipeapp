@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouter from './renderWithRouter';
+import RenderWithRouter from './renderWithRouter';
 import Footer from '../components/Footer';
 import App from '../App';
 import Home from '../pages/Home';
@@ -15,7 +15,7 @@ import Favorites from '../pages/Favorites';
 describe('Testa o componente Footer', () => {
   it('o componente contém um conjunto fixo de botões',
     () => {
-      renderWithRouter(<Footer />);
+      RenderWithRouter(<Footer />);
 
       const drink = screen.getByRole('img', { name: /drink/i });
       expect(drink).toHaveAttribute('src', 'drinkIcon.svg');
@@ -46,56 +46,56 @@ describe('Testa o componente Footer', () => {
 
   it('o componente Footer não deve estar presente na tela de Login',
     () => {
-      renderWithRouter(<App />);
+      RenderWithRouter(<App />);
       const footer = screen.queryByTestId('footer');
       expect(footer).not.toBeInTheDocument();
     });
 
   it('o componente Footer deve estar presente na tela Home',
     () => {
-      renderWithRouter(<Home />);
+      RenderWithRouter(<Home />);
       const footer = screen.queryByTestId('footer');
       expect(footer).toBeInTheDocument();
     });
 
   // it('o componente Footer não deve estar presente na tela de Detalhes da Receita',
   //   () => {
-  //     renderWithRouter(<Details />);
+  //     RenderWithRouter(<Details />);
   //     const footer = screen.queryByTestId('footer');
   //     expect(footer).not.toBeInTheDocument();
   //   });
 
   // it('o componente Footer não deve estar presente na tela de Receitas em Progresso',
   //   () => {
-  //     renderWithRouter(<InProgress />);
+  //     RenderWithRouter(<InProgress />);
   //     const footer = screen.queryByTestId('footer');
   //     expect(footer).not.toBeInTheDocument();
   //   });
 
   // it('o componente Footer deve estar presente na tela Explorar',
   //   () => {
-  //     renderWithRouter(<Explorer />);
+  //     RenderWithRouter(<Explorer />);
   //     const footer = screen.queryByTestId('footer');
   //     expect(footer).toBeInTheDocument();
   //   });
 
   // it('o componente Footer deve estar presente na tela de Perfil',
   //   () => {
-  //     renderWithRouter(<Profile />);
+  //     RenderWithRouter(<Profile />);
   //     const footer = screen.queryByTestId('footer');
   //     expect(footer).toBeInTheDocument();
   //   });
 
   it('o componente Footer não deve estar presente na tela de Receitas Feitas',
     () => {
-      renderWithRouter(<Done />);
+      RenderWithRouter(<Done />);
       const footer = screen.queryByTestId('footer');
       expect(footer).not.toBeInTheDocument();
     });
 
   it('o componente Footer não deve estar presente na tela de Receitas Favoritas',
     () => {
-      renderWithRouter(<Favorites />);
+      RenderWithRouter(<Favorites />);
       const footer = screen.queryByTestId('footer');
       expect(footer).not.toBeInTheDocument();
     });
