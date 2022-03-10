@@ -1,8 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import renderWithRouter from './renderWithRouter';
-// import Profile from '../pages/Profile';
+import RenderWithRouter from './RenderWithRouter';
 import App from '../App';
 
 const RADOM_EMAIL = 'RAMDOM@EMAIL.com';
@@ -11,7 +10,7 @@ const BTN_LENGTH = 3;
 
 describe('Testar a página Profile', () => {
   it('Teste se a página contém o email do localStorage', () => {
-    const { history } = renderWithRouter(<App />);
+    const { history } = RenderWithRouter(<App />);
 
     const inputEmail = screen.getByLabelText('Email:');
     const inputPassword = screen.getByLabelText('Senha:');
@@ -27,7 +26,7 @@ describe('Testar a página Profile', () => {
   });
 
   it('Teste se a página contém três botões', () => {
-    const { history } = renderWithRouter(<App />);
+    const { history } = RenderWithRouter(<App />);
 
     const inputEmail = screen.getByLabelText('Email:');
     const inputPassword = screen.getByLabelText('Senha:');
@@ -42,7 +41,7 @@ describe('Testar a página Profile', () => {
   });
 
   it('Teste se o botão Done Recipes vai para a rota /done-recipes', () => {
-    const { history } = renderWithRouter(<App />);
+    const { history } = RenderWithRouter(<App />);
 
     const inputEmail = screen.getByLabelText('Email:');
     const inputPassword = screen.getByLabelText('Senha:');
@@ -62,7 +61,7 @@ describe('Testar a página Profile', () => {
   });
 
   it('Teste se o botão Favorite Recipes vai para a rota /favorites-recipes', () => {
-    const { history } = renderWithRouter(<App />);
+    const { history } = RenderWithRouter(<App />);
 
     const inputEmail = screen.getByLabelText('Email:');
     const inputPassword = screen.getByLabelText('Senha:');
@@ -81,7 +80,7 @@ describe('Testar a página Profile', () => {
   });
 
   it('Teste se o botão Logout vai para a rota /', () => {
-    const { history } = renderWithRouter(<App />);
+    const { history } = RenderWithRouter(<App />);
 
     const inputEmail = screen.getByLabelText('Email:');
     const inputPassword = screen.getByLabelText('Senha:');
