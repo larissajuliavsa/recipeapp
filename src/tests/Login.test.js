@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import RenderWithRouter from './RenderWithRouter';
+import renderWithRouter from './renderWithRouter';
 import App from '../App';
 
 const RADOM_EMAIL = 'RAMDOM@EMAIL.com';
@@ -10,7 +10,7 @@ const LINK = '/foods';
 
 describe('Teste a Tela de Login', () => {
   beforeEach(() => {
-    RenderWithRouter(<App />);
+    renderWithRouter(<App />);
   });
 
   it('a página contém um campo de email e se é possivel ecrever um email', () => {
@@ -48,7 +48,7 @@ describe('Teste a Tela de Login', () => {
 });
 
 test('o botao "entrar" muda a rota', () => {
-  const { history } = RenderWithRouter(<App />);
+  const { history } = renderWithRouter(<App />);
 
   const labelEmail = screen.getByLabelText(/email:/i);
   userEvent.type(labelEmail, RADOM_EMAIL);

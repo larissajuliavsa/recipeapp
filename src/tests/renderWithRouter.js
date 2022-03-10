@@ -3,13 +3,16 @@ import { render } from '@testing-library/react';
 import { Router } from 'react-router';
 import { createMemoryHistory } from 'history';
 
-export default function RenderWithRouter(component) {
+const RenderWithRouter = (component) => {
   const history = createMemoryHistory();
-  render(
-    <Router history={ history }>
-      { component }
-    </Router>,
-  );
+  return {
+    ...render(
+      <Router history={ history }>
+        {component}
+      </Router>,
+    ),
+    history,
+  };
+};
 
-  return { history };
-}
+export default RenderWithRouter;
