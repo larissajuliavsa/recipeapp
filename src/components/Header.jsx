@@ -11,7 +11,35 @@ function Header() {
 
   const [showBar, setShowBar] = useState(false);
 
-  const searchBar = () => <input data-testid="search-input" />;
+  const searchBar = () => (
+    <>
+      <input data-testid="search-input" />
+      <input
+        type="radio"
+        name="searchRadio"
+        data-testid="ingredient-search-radio"
+        label="Ingrediente"
+      />
+      <input
+        type="radio"
+        name="searchRadio"
+        data-testid="name-search-radio"
+        label="Nome"
+      />
+      <input
+        type="radio"
+        name="searchRadio"
+        data-testid="first-letter-search-radio"
+        label="Primeira Letra"
+      />
+      <button
+        type="button"
+        data-testid="exec-search-btn"
+      >
+        Filtrar
+      </button>
+    </>
+  );
 
   return (
     <header>
