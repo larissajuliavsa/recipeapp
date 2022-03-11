@@ -7,6 +7,19 @@ function RecipeProvider({ children }) {
   const [loginPassword, setLoginPassword] = useState('');
   const [loginButtonDisabled, setLoginButtonDisabled] = useState(true);
 
+  const [renderDetailsFood, setRenderDetailsFood] = useState([]);
+  const [ingredientsFood, setIngredientsFood] = useState([]);
+  const [measureFood, setMeasureFood] = useState([]);
+
+  const [renderDetailsDrink, setRenderDetailsDrink] = useState([]);
+  const [ingredientsDrink, setIngredientsDrink] = useState([]);
+  const [measureDrink, setMeasureDrink] = useState([]);
+
+  const [recommendationDrink, setRecommendationDrink] = useState([]);
+  const [recommendationFood, setRecommendationFood] = useState([]);
+
+  const [videoId, setVideoId] = useState('');
+
   const isLoginButtonDisabled = () => {
     const MIN_LENGTH = 6;
     const validate = loginEmail.includes('@' && '.com');
@@ -34,6 +47,24 @@ function RecipeProvider({ children }) {
     loginPassword,
     loginButtonDisabled,
     handleChange,
+    renderDetailsFood,
+    setRenderDetailsFood,
+    renderDetailsDrink,
+    setRenderDetailsDrink,
+    ingredientsFood,
+    setIngredientsFood,
+    measureFood,
+    setMeasureFood,
+    ingredientsDrink,
+    setIngredientsDrink,
+    measureDrink,
+    setMeasureDrink,
+    videoId,
+    setVideoId,
+    recommendationFood,
+    setRecommendationFood,
+    recommendationDrink,
+    setRecommendationDrink,
   };
 
   return (

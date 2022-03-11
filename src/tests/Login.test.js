@@ -1,7 +1,7 @@
 import React from 'react';
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import RenderWithRouter from './RenderWithRouter';
+import RenderWithRouter from './renderWithRouter';
 import App from '../App';
 
 const RADOM_EMAIL = 'RAMDOM@EMAIL.com';
