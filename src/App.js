@@ -9,8 +9,6 @@ import DetailsDrink from './pages/DetailsDrink';
 import Done from './pages/Done';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
-import Explorer from './pages/Explorer';
-import ExplorerTypes from './pages/ExplorerTypes';
 
 function App() {
   return (
