@@ -11,6 +11,7 @@ import Favorites from './pages/Favorites';
 import Explorer from './pages/Explorer';
 import ExplorerTypes from './pages/ExplorerTypes';
 import ExplorerIngredients from './pages/ExplorerIngredients';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             path="/explore/:foodsAndDrinks/ingredients"
             render={ (props) => <ExplorerIngredients { ...props } /> }
           />
+          <Route path="*" component={ NotFound } />
         </Switch>
       </RecipeProvider>
     </div>
