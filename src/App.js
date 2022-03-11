@@ -12,6 +12,7 @@ import Explorer from './pages/Explorer';
 import ExplorerTypes from './pages/ExplorerTypes';
 import ExplorerIngredients from './pages/ExplorerIngredients';
 import NotFound from './pages/NotFound';
+import ExplorerNationalities from './pages/ExplorerNationalities';
 
 function App() {
   return (
@@ -33,6 +34,11 @@ function App() {
             exact
             path="/explore/:foodsAndDrinks/ingredients"
             render={ (props) => <ExplorerIngredients { ...props } /> }
+          />
+          <Route
+            exact
+            path="/explore/foods/nationalities"
+            component={ ExplorerNationalities }
           />
           <Route path="*" component={ NotFound } />
         </Switch>
