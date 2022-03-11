@@ -22,6 +22,8 @@ function App() {
         <Switch>
           <Route exact path="/" render={ (props) => <Login { ...props } /> } />
           <Route exact path="/foods" component={ Home } />
+          <Route exact path="/foods/:id" component={ DetailsFood } />
+          <Route exact path="/drinks/:id" component={ DetailsDrink } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ Done } />
           <Route exact path="/favorite-recipes" component={ Favorites } />
@@ -46,5 +48,7 @@ function App() {
         </Switch>
       </RecipeProvider>
     </div>
+  );
+}
 
 export default App;
