@@ -4,7 +4,7 @@ function NotFound() {
   return (
     <div data-testid="page-not-found">
       <h3>404</h3>
-      <p>NotFound</p>
+      <p>Not Found</p>
     </div>
   );
 }

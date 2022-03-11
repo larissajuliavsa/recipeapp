@@ -55,6 +55,13 @@ function ExplorerNationalities() {
           value={ nationalitiesDropdown }
           onChange={ ({ target }) => setNationalitiesDropdown(target.value) }
         >
+          <option
+            key="All"
+            data-testid="All-option"
+            id="All"
+          >
+            All
+          </option>
           {nationalities.map(({ strArea }) => (
             <option
               key={ strArea }
