@@ -14,6 +14,7 @@ import ExplorerTypes from './pages/ExplorerTypes';
 import ExplorerIngredients from './pages/ExplorerIngredients';
 import NotFound from './pages/NotFound';
 import ExplorerNationalities from './pages/ExplorerNationalities';
+import './assets/css/App.css';
 
 function App() {
   return (
