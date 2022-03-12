@@ -12,6 +12,10 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import {
+  addRecipeLocalStorage,
+  checkLocalStorage,
+  removeRecipeLocalStorage } from '../services/functions';
 
 const copy = require('clipboard-copy');
 
@@ -32,11 +36,10 @@ function DetailsDrink({ history }) {
     setRecommendationDrink,
   } = useContext(RecipeContext);
   const [messageCopied, setMessageCopied] = useState(false);
-
+  const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
 
   const inProgressKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const favoriteKeys = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
   useEffect(() => {
     async function recipeDrinkAPI() {
@@ -103,29 +106,19 @@ function DetailsDrink({ history }) {
     }, TIMER_MESSAGE);
   }
 
-  function saveRecipeLocalStorage() {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(
-      [
-        {
-          id,
-          type: 'drink',
-          nationality: '',
-          category: renderDetailsDrink.strCategory,
-          alcoholicOrNot: renderDetailsDrink.strAlcoholic,
-          name: renderDetailsDrink.strDrink,
-          image: renderDetailsDrink.strDrinkThumb,
-        },
-      ],
-    ));
+  function addRecipeFavorite() {
+    addRecipeLocalStorage(renderDetailsDrink, 'Drink');
+    setIsFavorite(true);
   }
 
-  function checkLocalStorage() {
-    const recipeFavorite = favoriteKeys.filter((ele) => ele.id === id);
-    if (recipeFavorite.length > 0) {
-      return (<img src={ blackHeartIcon } alt="Favoritar Receita" />);
-    }
-    return (<img src={ whiteHeartIcon } alt="Favoritar Receita" />);
+  function removeRecipeFavorite() {
+    removeRecipeLocalStorage(id);
+    setIsFavorite(false);
   }
+
+  useEffect(() => {
+    setIsFavorite(checkLocalStorage(id));
+  }, []);
 
   function buttonRecipe() {
     const doneKey = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -176,11 +169,17 @@ function DetailsDrink({ history }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
-        onClick={ saveRecipeLocalStorage }
+        onClick={
+          isFavorite
+            ? removeRecipeFavorite
+            : addRecipeFavorite
+        }
       >
-        {favoriteKeys ? checkLocalStorage() : (
-          <img src={ whiteHeartIcon } alt="Favoritar Receita" />)}
+        <img
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="Favoritar Receita"
+          data-testid="favorite-btn"
+        />
       </button>
       <p data-testid="recipe-category">{renderDetailsDrink.strAlcoholic}</p>
       {measureDrink.length > 0

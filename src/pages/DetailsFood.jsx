@@ -13,6 +13,10 @@ import '../assets/DetailsFood.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import {
+  addRecipeLocalStorage,
+  checkLocalStorage,
+  removeRecipeLocalStorage } from '../services/functions';
 
 const getYouTubeID = require('get-youtube-id');
 
@@ -37,11 +41,11 @@ function DetailsFood({ history }) {
     setVideoId,
   } = useContext(RecipeContext);
   const [messageCopied, setMessageCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   const { id } = useParams();
 
   const inProgressKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
-  const favoriteKeys = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
   useEffect(() => {
     async function recipeFoodAPI() {
@@ -118,31 +122,19 @@ function DetailsFood({ history }) {
     }, TIMER_MESSAGE);
   }
 
-  function saveRecipeLocalStorage() {
-    localStorage.setItem('favoriteRecipes', JSON.stringify(
-      [
-        {
-          id,
-          type: 'food',
-          nationality: renderDetailsFood.strArea,
-          category: renderDetailsFood.strCategory,
-          alcoholicOrNot: '',
-          name: renderDetailsFood.strMeal,
-          image: renderDetailsFood.strMealThumb,
-        },
-      ],
-    ));
+  function addRecipeFavorite() {
+    addRecipeLocalStorage(renderDetailsFood, 'Meal');
+    setIsFavorite(true);
   }
 
-  function checkLocalStorage() {
-    const recipeFavorite = favoriteKeys.filter((e) => e.id === id);
-    if (recipeFavorite.length > 0) {
-      return blackHeartIcon;
-    }
-    if (recipeFavorite.length === 0) {
-      return whiteHeartIcon;
-    }
+  function removeRecipeFavorite() {
+    removeRecipeLocalStorage(id);
+    setIsFavorite(false);
   }
+
+  useEffect(() => {
+    setIsFavorite(checkLocalStorage(id));
+  }, []);
 
   function buttonRecipe() {
     const doneKey = JSON.parse(localStorage.getItem('doneRecipes'));
@@ -193,12 +185,16 @@ function DetailsFood({ history }) {
       </button>
       <button
         type="button"
-        data-testid="favorite-btn"
-        onClick={ saveRecipeLocalStorage }
+        onClick={
+          isFavorite
+            ? removeRecipeFavorite
+            : addRecipeFavorite
+        }
       >
         <img
-          src={ favoriteKeys ? checkLocalStorage() : whiteHeartIcon }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
           alt="Favoritar Receita"
+          data-testid="favorite-btn"
         />
       </button>
       <p data-testid="recipe-category">{renderDetailsFood.strCategory}</p>
