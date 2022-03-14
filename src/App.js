@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import DetailsFood from './pages/DetailsFood';
 import DetailsDrink from './pages/DetailsDrink';
 import Done from './pages/Done';
+import Drinks from './pages/Drinks';
 import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import Explorer from './pages/Explorer';
@@ -24,6 +25,7 @@ function App() {
           <Route exact path="/foods" component={ Home } />
           <Route exact path="/foods/:id" component={ DetailsFood } />
           <Route exact path="/drinks/:id" component={ DetailsDrink } />
+          <Route exact path="/drinks" component={ Drinks } />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ Done } />
           <Route exact path="/favorite-recipes" component={ Favorites } />
