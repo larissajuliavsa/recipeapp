@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
 import RecipeContext from '../context/RecipeContext';
@@ -10,11 +11,20 @@ import getRecommendationDrinkAPI from '../services/recommendationDrinkAPI';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
-// import blackHeartIcon from '../images/blackHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import {
+  addRecipeLocalStorage,
+  checkLocalStorage,
+  removeRecipeLocalStorage } from '../services/functions';
+
+const copy = require('clipboard-copy');
 
 const API_LENGTH = 6;
+const TIMER_MESSAGE = 2000;
 
-function DetailsDrink() {
+function DetailsDrink({ history }) {
+  const { location: { pathname } } = history;
+
   const {
     renderDetailsDrink,
     setRenderDetailsDrink,
@@ -25,8 +35,11 @@ function DetailsDrink() {
     recommendationDrink,
     setRecommendationDrink,
   } = useContext(RecipeContext);
-
+  const [messageCopied, setMessageCopied] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
+
+  const inProgressKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
   useEffect(() => {
     async function recipeDrinkAPI() {
@@ -84,24 +97,59 @@ function DetailsDrink() {
     );
   }
 
-  function buttonRecipe() {
-    const inProgressKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
+  function saveLinkClipBoard() {
+    copy(`http://localhost:3000${pathname}`);
+    setMessageCopied(true);
+    const setIntervalId = setInterval(() => {
+      clearInterval(setIntervalId);
+      setMessageCopied(false);
+    }, TIMER_MESSAGE);
+  }
 
-    if (inProgressKey) {
+  function addRecipeFavorite() {
+    addRecipeLocalStorage(renderDetailsDrink, 'Drink');
+    setIsFavorite(true);
+  }
+
+  function removeRecipeFavorite() {
+    removeRecipeLocalStorage(id);
+    setIsFavorite(false);
+  }
+
+  useEffect(() => {
+    setIsFavorite(checkLocalStorage(id));
+  }, []);
+
+  function buttonRecipe() {
+    const doneKey = JSON.parse(localStorage.getItem('doneRecipes'));
+
+    if (doneKey) {
+      const recipeDone = doneKey.filter((ele) => ele.id === id);
+      if (recipeDone.length > 0) {
+        return null;
+      }
+    }
+
+    if (inProgressKey && inProgressKey.cocktails[id]) {
       return (
         <button className="btn-details" type="button" data-testid="start-recipe-btn">
           Continue Recipe
         </button>
       );
     }
+
     return (
-      <button className="btn-details" type="button" data-testid="start-recipe-btn">
+      <button
+        className="btn-details"
+        type="button"
+        data-testid="start-recipe-btn"
+        onClick={ () => history.push(`/drinks/${id}/in-progress`) }
+      >
         Start Recipe
       </button>
     );
   }
 
-  console.log(renderDetailsDrink);
   return (
     <main>
       <img
@@ -111,11 +159,27 @@ function DetailsDrink() {
         data-testid="recipe-photo"
       />
       <h3 data-testid="recipe-title">{renderDetailsDrink.strDrink}</h3>
-      <button type="button" data-testid="share-btn">
+      { messageCopied && (<p><b>Link copied!</b></p>)}
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ saveLinkClipBoard }
+      >
         <img src={ shareIcon } alt="Compartilhar Receita" />
       </button>
-      <button type="button" data-testid="favorite-btn">
-        <img src={ whiteHeartIcon } alt="Favoritar Receita" />
+      <button
+        type="button"
+        onClick={
+          isFavorite
+            ? removeRecipeFavorite
+            : addRecipeFavorite
+        }
+      >
+        <img
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+          alt="Favoritar Receita"
+          data-testid="favorite-btn"
+        />
       </button>
       <p data-testid="recipe-category">{renderDetailsDrink.strAlcoholic}</p>
       {measureDrink.length > 0
@@ -132,5 +196,14 @@ function DetailsDrink() {
     </main>
   );
 }
+
+DetailsDrink.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
+};
 
 export default DetailsDrink;
