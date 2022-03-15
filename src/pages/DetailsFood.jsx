@@ -1,8 +1,7 @@
 /* eslint-disable import/no-unresolved */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import YouTube from 'react-youtube';
 
 import RecipeContext from '../context/RecipeContext';
@@ -10,25 +9,23 @@ import Header from '../components/Header';
 import getDetailsFoodAPI from '../services/detailsFoodAPI';
 import getRecommendationFoodAPI from '../services/recommendationFoodAPI';
 
+import {
+  addRecipeLocalStorage,
+  checkLocalStorage,
+  removeRecipeLocalStorage,
+} from '../services/functions';
+import { opts, API_LENGTH, TIMER_MESSAGE } from '../helpers/constants';
+
 import '../assets/css/DetailsFood.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import {
-  addRecipeLocalStorage,
-  checkLocalStorage,
-  removeRecipeLocalStorage } from '../services/functions';
 
 const getYouTubeID = require('get-youtube-id');
 
 const copy = require('clipboard-copy');
 
-const API_LENGTH = 6;
-const TIMER_MESSAGE = 2000;
-
-function DetailsFood({ history }) {
-  const { location: { pathname } } = history;
-
+function DetailsFood() {
   const {
     renderDetailsFood,
     setRenderDetailsFood,
@@ -45,6 +42,8 @@ function DetailsFood({ history }) {
   const [isFavorite, setIsFavorite] = useState(false);
 
   const { id } = useParams();
+  const location = useLocation();
+  const history = useHistory();
 
   const inProgressKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
@@ -80,14 +79,6 @@ function DetailsFood({ history }) {
     setVideoId(getYouTubeID(renderDetailsFood.strYoutube));
   }, [renderDetailsFood]);
 
-  const opts = {
-    height: '250',
-    width: '300',
-    playerVars: {
-      autoplay: 0,
-    },
-  };
-
   function drinksCarousel() {
     return (
       <div className="container-carousel">
@@ -118,7 +109,7 @@ function DetailsFood({ history }) {
   }
 
   function saveLinkClipBoard() {
-    copy(`http://localhost:3000${pathname}`);
+    copy(`http://localhost:3000${location.pathname}`);
     setMessageCopied(true);
     const setIntervalId = setInterval(() => {
       clearInterval(setIntervalId);
@@ -167,10 +158,7 @@ function DetailsFood({ history }) {
         className="btn-details"
         type="button"
         data-testid="start-recipe-btn"
-<<<<<<< main-group-19-login-css
-=======
         onClick={ () => history.push(`/foods/${id}/in-progress`) }
->>>>>>> main-group-19
       >
         Start Recipe
       </button>
@@ -178,7 +166,6 @@ function DetailsFood({ history }) {
   }
 
   return (
-<<<<<<< main-group-19-login-css
     <>
       <header>
         <Header />
@@ -191,7 +178,13 @@ function DetailsFood({ history }) {
           data-testid="recipe-photo"
         />
         <div className="container-recipe-introduction">
-          <button className="btn-share" type="button" data-testid="share-btn">
+          {messageCopied && <p>Link copied!</p>}
+          <button
+            className="btn-share"
+            type="button"
+            data-testid="share-btn"
+            onClick={ saveLinkClipBoard }
+          >
             <img
               className="share-icon"
               src={ shareIcon }
@@ -210,12 +203,13 @@ function DetailsFood({ history }) {
           <button
             className="btn-favorite"
             type="button"
-            data-testid="favorite-btn"
+            onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
           >
             <img
               className="favorite-icon"
-              src={ whiteHeartIcon }
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
               alt="Favoritar Receita"
+              data-testid="favorite-btn"
             />
           </button>
         </div>
@@ -243,63 +237,7 @@ function DetailsFood({ history }) {
         {buttonRecipe()}
       </main>
     </>
-=======
-    <main>
-      <img
-        src={ renderDetailsFood.strMealThumb }
-        style={ { width: '10%' } }
-        alt="Foto da Receita"
-        data-testid="recipe-photo"
-      />
-      <h3 data-testid="recipe-title">{renderDetailsFood.strMeal}</h3>
-      { messageCopied && (<p><b>Link copied!</b></p>)}
-      <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ saveLinkClipBoard }
-      >
-        <img src={ shareIcon } alt="Compartilhar Receita" />
-      </button>
-      <button
-        type="button"
-        onClick={
-          isFavorite
-            ? removeRecipeFavorite
-            : addRecipeFavorite
-        }
-      >
-        <img
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favoritar Receita"
-          data-testid="favorite-btn"
-        />
-      </button>
-      <p data-testid="recipe-category">{renderDetailsFood.strCategory}</p>
-      {measureFood.length > 0
-        && measureFood.map((measure, index) => (
-          <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {ingredientsFood[index]}
-            {measure}
-          </p>
-        ))}
-      <p data-testid="instructions">{renderDetailsFood.strInstructions}</p>
-      <div data-testid="video">
-        <YouTube videoId={ videoId } opts={ opts } />
-      </div>
-      {drinksCarousel()}
-      {buttonRecipe()}
-    </main>
->>>>>>> main-group-19
   );
 }
-
-DetailsFood.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }).isRequired,
-};
 
 export default DetailsFood;
