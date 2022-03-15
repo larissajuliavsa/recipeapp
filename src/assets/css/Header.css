@@ -1,0 +1,51 @@
+.container-header {
+  background-color: #FFFF;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 0px 0px 25px 25px;
+  box-shadow: 0px 4px 9px rgba(149, 149, 149, 0.274);
+}
+
+.header-btn-search, .header-btn-profile {
+  border: none;
+  background-color: #FFFF;
+}
+
+.container-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00D76B;
+  margin-bottom: 0 !important;
+}
+
+.title-line {
+  background-color: #00D76B;
+}
+
+@media screen and (max-width: 360px) {
+  .container-header {    
+    padding: 20px;
+    margin: 0 auto;
+  }
+
+  .btn-search-icon, .btn-profile-icon {
+    width: 20px;
+  }
+
+  .header-title {
+    font-size: 18px;
+  }
+
+  .title-line {
+    width: 58px;
+    height: 3px;
+  }
+}
