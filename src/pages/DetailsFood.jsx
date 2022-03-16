@@ -5,7 +5,6 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import YouTube from 'react-youtube';
 
 import RecipeContext from '../context/RecipeContext';
-import Header from '../components/Header';
 import getDetailsFoodAPI from '../services/detailsFoodAPI';
 import getRecommendationFoodAPI from '../services/recommendationFoodAPI';
 
@@ -166,77 +165,72 @@ function DetailsFood() {
   }
 
   return (
-    <>
-      <header>
-        <Header />
-      </header>
-      <main className="container-details-food">
-        <img
-          src={ renderDetailsFood.strMealThumb }
-          className="details-image-recipe"
-          alt="Foto da Receita"
-          data-testid="recipe-photo"
-        />
-        <div className="container-recipe-introduction">
-          <button
-            className="btn-share"
-            type="button"
-            data-testid="share-btn"
-            onClick={ saveLinkClipBoard }
-          >
-            <img
-              className="share-icon"
-              src={ shareIcon }
-              alt="Compartilhar Receita"
-            />
-            {messageCopied && <p className="btn-share-copied">Link copied!</p>}
-          </button>
-          <div className="recipe-name-category">
-            <h3 className="recipe-name" data-testid="recipe-title">
-              {renderDetailsFood.strMeal}
-            </h3>
-            <div className="recipe-line" />
-            <p className="recipe-category" data-testid="recipe-category">
-              {renderDetailsFood.strCategory}
+    <main className="container-details-food">
+      <img
+        src={ renderDetailsFood.strMealThumb }
+        className="details-image-recipe"
+        alt="Foto da Receita"
+        data-testid="recipe-photo"
+      />
+      <div className="container-recipe-introduction">
+        <button
+          className="btn-share"
+          type="button"
+          data-testid="share-btn"
+          onClick={ saveLinkClipBoard }
+        >
+          <img
+            className="share-icon"
+            src={ shareIcon }
+            alt="Compartilhar Receita"
+          />
+          {messageCopied && <p className="btn-share-copied">Link copied!</p>}
+        </button>
+        <div className="recipe-name-category">
+          <h3 className="recipe-name" data-testid="recipe-title">
+            {renderDetailsFood.strMeal}
+          </h3>
+          <div className="recipe-line" />
+          <p className="recipe-category" data-testid="recipe-category">
+            {renderDetailsFood.strCategory}
+          </p>
+        </div>
+        <button
+          className="btn-favorite"
+          type="button"
+          onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
+        >
+          <img
+            className="favorite-icon"
+            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+            alt="Favoritar Receita"
+            data-testid="favorite-btn"
+          />
+        </button>
+      </div>
+      <div className="container-ingredient">
+        {measureFood.length > 0
+          && measureFood.map((measure, index) => (
+            <p
+              className="ingredient-measure"
+              key={ index }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {ingredientsFood[index]}
+              {' '}
+              <span>{measure}</span>
             </p>
-          </div>
-          <button
-            className="btn-favorite"
-            type="button"
-            onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
-          >
-            <img
-              className="favorite-icon"
-              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-              alt="Favoritar Receita"
-              data-testid="favorite-btn"
-            />
-          </button>
-        </div>
-        <div className="container-ingredient">
-          {measureFood.length > 0
-            && measureFood.map((measure, index) => (
-              <p
-                className="ingredient-measure"
-                key={ index }
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {ingredientsFood[index]}
-                {' '}
-                <span>{measure}</span>
-              </p>
-            ))}
-        </div>
-        <div className="container-instructions">
-          <p data-testid="instructions">{renderDetailsFood.strInstructions}</p>
-        </div>
-        <div className="video-youtube" data-testid="video">
-          <YouTube videoId={ videoId } opts={ opts } />
-        </div>
-        {drinksCarousel()}
-        {buttonRecipe()}
-      </main>
-    </>
+          ))}
+      </div>
+      <div className="container-instructions">
+        <p data-testid="instructions">{renderDetailsFood.strInstructions}</p>
+      </div>
+      <div className="video-youtube" data-testid="video">
+        <YouTube videoId={ videoId } opts={ opts } />
+      </div>
+      {drinksCarousel()}
+      {buttonRecipe()}
+    </main>
   );
 }
 
