@@ -16,38 +16,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 40px 0 !important;
 }
 
 .container-name p {
   text-transform: uppercase;
   font-weight: bold;
-  font-size: 16px;
   color: #00D76B;
-  margin-bottom: 0 !important;
 }
 
 .name-line {
   background-color: #00D76B;
-  width: 62px;
-  height: 3px;
 }
 
 /* CONTAINER INPUTS */
-.container-email p, .container-password p {
-  margin-bottom: 2px !important;
-  font-size: 14px;
-}
-
 .container-email input, .container-password input {
-  border-radius: 8px;
   border: 1px solid #5F5F5E;
-  margin-bottom: 20px !important;
 }
 
 /* CONTAINER BUTTON */
 .container-btn {
-  margin: 30px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,15 +44,10 @@
   background-color: #00D76B;
   color: #FFFFFF;
   border: none;
-  border-radius: 8px;
   text-transform: uppercase;
-  font-size: 10px;
   font-weight: bold;
-  padding: 8px 30px;
-  width: 100%;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
   cursor: pointer;
-
   transition: all 250ms;
   user-select: none;
   -webkit-user-select: none;
@@ -85,13 +67,151 @@
   transform: translateY(0);
 }
 
+@media screen and (min-width: 771px) {
+  /* BODY LOGIN */
+  .container-login {  
+    width: 30%;
+    margin: 3% auto;
+  }
 
-/* @media screen and (min-width: 420px) and (max-width: 920px) {}; */
+  /* CONTAINER NAME APP */
+  .container-name {
+    margin: 40px 0 !important;
+  }
+
+  .container-name p {
+    font-size: 24px;
+    margin-bottom: 0 !important;
+  }
+
+  .name-line {
+    width: 68px;
+    height: 4px;
+  }
+
+  /* CONTAINER INPUTS */
+  .container-email p, .container-password p {
+    margin-bottom: 2px !important;
+    font-size: 14px;
+  }
+
+  .container-email input, .container-password input {
+    border-radius: 8px;
+    padding: 2px 15px;
+    margin-bottom: 20px !important;
+  }
+
+  /* BUTTON */
+  .btn-logo {
+    width: 50%;
+  }
+
+  .container-btn {
+    margin: 30px 0;
+  }
+
+  .container-btn button {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 32px;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  /* BODY LOGIN */
+  .container-login {  
+    width: 80%;
+    margin: 25% auto;
+  }
+
+  /* CONTAINER NAME APP */
+  .container-name {
+    margin: 40px 0 !important;
+  }
+
+  .container-name p {
+    font-size: 24px;
+    margin-bottom: 0 !important;
+  }
+
+  .name-line {
+    width: 68px;
+    height: 4px;
+  }
+
+  /* CONTAINER INPUTS */
+  .container-email p, .container-password p {
+    margin-bottom: 2px !important;
+    font-size: 14px;
+  }
+
+  .container-email input, .container-password input {
+    border-radius: 8px;
+    padding: 2px 15px;
+    margin-bottom: 20px !important;
+  }
+
+  /* BUTTON */
+  .btn-logo {
+    width: 60%;
+  }
+
+  .container-btn {
+    margin: 30px 0;
+  }
+
+  .container-btn button {
+    border-radius: 8px;
+    font-size: 14px;
+    padding: 10px 32px;
+    width: 100%;
+  }
+};
 
 @media screen and (max-width: 360px) {
-/* BODY LOGIN */
-.container-login {  
-  width: 80%;
-  margin: 25% auto;
-}
+  /* BODY LOGIN */
+  .container-login {  
+    width: 80%;
+    margin: 25% auto;
+  }
+
+  /* CONTAINER NAME APP */
+  .container-name {
+    margin: 40px 0 !important;
+  }
+
+  .container-name p {
+    font-size: 16px;
+    margin-bottom: 0 !important;
+  }
+
+  .name-line {
+    width: 62px;
+    height: 3px;
+  }
+
+  /* CONTAINER INPUTS */
+  .container-email p, .container-password p {
+    margin-bottom: 2px !important;
+    font-size: 14px;
+  }
+
+  .container-email input, .container-password input {
+    border-radius: 8px;
+    padding: 2px 5px;
+    margin-bottom: 20px !important;
+  }
+
+  /* CONTAINER BUTTON */
+  .container-btn {
+    margin: 30px 0;
+  }
+
+  .container-btn button {
+    border-radius: 8px;
+    font-size: 10px;
+    padding: 8px 30px;
+    width: 100%;
+  }
 }

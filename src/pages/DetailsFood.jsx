@@ -178,7 +178,6 @@ function DetailsFood() {
           data-testid="recipe-photo"
         />
         <div className="container-recipe-introduction">
-          {messageCopied && <p>Link copied!</p>}
           <button
             className="btn-share"
             type="button"
@@ -190,6 +189,7 @@ function DetailsFood() {
               src={ shareIcon }
               alt="Compartilhar Receita"
             />
+            {messageCopied && <p className="btn-share-copied">Link copied!</p>}
           </button>
           <div className="recipe-name-category">
             <h3 className="recipe-name" data-testid="recipe-title">
