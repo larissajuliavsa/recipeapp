@@ -3,8 +3,8 @@
   align-items: center;
   background-color: white;
   border-radius: 24px;
-  box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, 
-    rgba(17, 17, 26, 0.05) 0px 8px 32px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0 4px 16px
+    rgba(17, 17, 26, 0.05) 0 8px 32px;
   display: flex;
   flex-direction: column;
   margin: 25% auto;
@@ -21,7 +21,7 @@
 
 .container-name p {
   color: #00d76b;
-  font-weight: bold;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
@@ -44,15 +44,13 @@
 .container-btn button {
   background-color: #00d76b;
   border: none;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0 3px 3px 0;
   color: white;
   cursor: pointer;
   font-weight: 600;
   text-transform: uppercase;
   touch-action: manipulation;
   transition: all 250ms;
-  user-select: none;
-  -webkit-user-select: none;
   vertical-align: baseline;
 }
 
@@ -61,16 +59,17 @@
 }
 
 .container-btn button:hover {
-  transform: translateY(-1px); 
+  transform: translateY(-1px);
 }
 
-.container-btn button:active {  
+.container-btn button:active {
   transform: translateY(0);
 }
 
-@media screen and (min-width: 771px) {
+@media screen and ( min-width : 771px ) {
+
   /* BODY LOGIN */
-  .container-login {  
+  .container-login {
     margin: 3% auto;
     width: 30%;
   }
@@ -119,12 +118,12 @@
   }
 }
 
-@media screen and (max-width: 770px) {
+@media screen and ( max-width : 770px ) {
 
   /* BODY LOGIN */
-  .container-login {  
-    width: 80%;
+  .container-login {
     margin: 25% auto;
+    width: 80%;
   }
 
   /* CONTAINER NAME APP */
@@ -169,12 +168,12 @@
     padding: 10px 32px;
     width: 100%;
   }
-};
+}
 
-@media screen and (max-width: 360px) {
+@media screen and ( max-width : 360px ) {
 
   /* BODY LOGIN */
-  .container-login {  
+  .container-login {
     margin: 25% auto;
     width: 80%;
   }

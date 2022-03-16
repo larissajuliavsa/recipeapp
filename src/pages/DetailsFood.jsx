@@ -15,10 +15,11 @@ import {
 } from '../services/functions';
 import { opts, API_LENGTH, TIMER_MESSAGE } from '../helpers/constants';
 
-import '../assets/css/DetailsFood.css';
+import '../assets/css/Details.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import backIcon from '../images/backIcon.svg';
 
 const getYouTubeID = require('get-youtube-id');
 
@@ -165,72 +166,82 @@ function DetailsFood() {
   }
 
   return (
-    <main className="container-details-food">
-      <img
-        src={ renderDetailsFood.strMealThumb }
-        className="details-image-recipe"
-        alt="Foto da Receita"
-        data-testid="recipe-photo"
-      />
-      <div className="container-recipe-introduction">
-        <button
-          className="btn-share"
-          type="button"
-          data-testid="share-btn"
-          onClick={ saveLinkClipBoard }
-        >
-          <img
-            className="share-icon"
-            src={ shareIcon }
-            alt="Compartilhar Receita"
-          />
-          {messageCopied && <p className="btn-share-copied">Link copied!</p>}
-        </button>
-        <div className="recipe-name-category">
-          <h3 className="recipe-name" data-testid="recipe-title">
-            {renderDetailsFood.strMeal}
-          </h3>
-          <div className="recipe-line" />
-          <p className="recipe-category" data-testid="recipe-category">
-            {renderDetailsFood.strCategory}
-          </p>
-        </div>
-        <button
-          className="btn-favorite"
-          type="button"
-          onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
-        >
-          <img
-            className="favorite-icon"
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-            alt="Favoritar Receita"
-            data-testid="favorite-btn"
-          />
-        </button>
-      </div>
-      <div className="container-ingredient">
-        {measureFood.length > 0
-          && measureFood.map((measure, index) => (
-            <p
-              className="ingredient-measure"
-              key={ index }
-              data-testid={ `${index}-ingredient-name-and-measure` }
-            >
-              {ingredientsFood[index]}
-              {' '}
-              <span>{measure}</span>
+    <>
+      <button
+        onClick={ () => history.push('/foods') }
+        type="button"
+        className="btn-back-home"
+      >
+        <img src={ backIcon } alt="Back to search home" />
+        <p className="btn-home-name">Foods</p>
+      </button>
+      <main className="container-details-main">
+        <img
+          src={ renderDetailsFood.strMealThumb }
+          className="details-image-recipe"
+          alt="Foto da Receita"
+          data-testid="recipe-photo"
+        />
+        <div className="container-recipe-introduction">
+          <button
+            className="btn-share"
+            type="button"
+            data-testid="share-btn"
+            onClick={ saveLinkClipBoard }
+          >
+            <img
+              className="share-icon"
+              src={ shareIcon }
+              alt="Compartilhar Receita"
+            />
+            {messageCopied && <p className="btn-share-copied">Link copied!</p>}
+          </button>
+          <div className="recipe-name-category">
+            <h3 className="recipe-name" data-testid="recipe-title">
+              {renderDetailsFood.strMeal}
+            </h3>
+            <div className="recipe-line" />
+            <p className="recipe-category" data-testid="recipe-category">
+              {renderDetailsFood.strCategory}
             </p>
-          ))}
-      </div>
-      <div className="container-instructions">
-        <p data-testid="instructions">{renderDetailsFood.strInstructions}</p>
-      </div>
-      <div className="video-youtube" data-testid="video">
-        <YouTube videoId={ videoId } opts={ opts } />
-      </div>
-      {drinksCarousel()}
-      {buttonRecipe()}
-    </main>
+          </div>
+          <button
+            className="btn-favorite"
+            type="button"
+            onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
+          >
+            <img
+              className="favorite-icon"
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="Favoritar Receita"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
+        <div className="container-ingredient">
+          {measureFood.length > 0
+            && measureFood.map((measure, index) => (
+              <p
+                className="ingredient-measure"
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {ingredientsFood[index]}
+                {' '}
+                <span>{measure}</span>
+              </p>
+            ))}
+        </div>
+        <div className="container-instructions">
+          <p data-testid="instructions">{renderDetailsFood.strInstructions}</p>
+        </div>
+        <div className="video-youtube" data-testid="video">
+          <YouTube videoId={ videoId } opts={ opts } />
+        </div>
+        {drinksCarousel()}
+        {buttonRecipe()}
+      </main>
+    </>
   );
 }
 
