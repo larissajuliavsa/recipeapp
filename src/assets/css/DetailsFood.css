@@ -5,6 +5,7 @@
   align-items: center;
   background-color: #FFFFFF;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px;
+  padding: 15px;
 }
 
 .details-image-recipe {
@@ -25,13 +26,17 @@
   border: none;
 }
 
-.btn-share:hover, .btn-favorite:hover {
+.btn-share:hover, .btn-favorite:hover, .btn-share-copied {
   transform: translateY(-3px); 
-  transition: 0.3s ease-in;
+  transition: 0.3s ease-in-out;
 }
 
 .btn-share:active, .btn-favorite:active {  
   transform: translateY(0);
+}
+
+.btn-share-copied {
+  font-weight: 500;
 }
 
 /* CONTAINER NAME CATEGORY */
@@ -133,16 +138,16 @@
   transform: translateY(0);
 }
 
-@media screen and (min-width: 770px) {
+@media screen and (min-width: 771px) {
   /* CONTAINER MAIN */
   .container-details-food {
-    margin-top: 30%;
-    border-radius: 100px 100px 0 0;    
+    margin-top: 25%;
+    border-radius: 40px 40px 0 0;    
   }
 
   .details-image-recipe {
-    margin: -200px auto 60px;
-    width: 25%;
+    margin: -12% auto 60px;
+    width: 20%;
   }
 
   /* CONTAINER SHARE NAME FAVORITE */
@@ -150,92 +155,101 @@
     margin: 20px auto;
   }
 
+  .btn-share, .btn-favorite {
+    width: 90px;
+  }
+
   .share-icon, .favorite-icon {
-    width: 50px;
+    width: 40px;
+  }
+
+  .btn-share-copied {
+    font-size: 12px;
+    margin-top: 5px;
   }
 
   /* CONTAINER NAME CATEGORY */
   .recipe-name-category {
-    margin: 0 70px;
+    margin: 0 80px;
   }
 
   .recipe-name {
-    font-size: 36px;
+    font-size: 32px;
     margin-bottom: 15px !important;
   }
 
   .recipe-line {
     width: 135px;
-    height: 10px;
+    height: 8px;
     margin-bottom: 15px !important;
   }
 
   .recipe-category {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   /* INGREDIENTS */
-  .ingredient-measure {    
+  .ingredient-measure {
     margin: 5px auto;
     text-align: center;
     letter-spacing: 3px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   /* INSTRUCTIONS */
   .container-instructions {
     width: 70%;
-    margin: 50px auto;
+    margin: 40px auto;
   }
 
   .container-instructions p {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   /* VIDEO */
   .video-youtube {
-    margin: 40px auto;
+    margin: 20px auto 50px;
   }
 
   /* CONTAINER RECOMMENDATIONS */
   .carousel-title {
-    font-size: 36px;
+    font-size: 22px;
   }
 
   .carousel-scroll {
     padding: 10px;
-    margin-bottom: 60px;
+    margin: 60px 0;
   }
 
   .card-image {
-    width: 35vw;
-    margin: 30px 95px;  
+    width: 20vw;
+    margin: 30px 190px;  
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px !important;
   }
 
   .card-name {
-    font-size: 28px;
+    font-size: 22px;
   }
 
   /* BUTTON */
   .btn-details {
     margin: 20px 0;
     padding: 10px 5px;
-    width: 30%;
+    width: 20%;
     border-radius: 18px;
-    font-size: 28px;
+    font-size: 24px;
   }
 }
 
-@media screen and (min-width: 360px) and (max-width: 770px) {
+@media screen and (max-width: 770px) {
   /* CONTAINER MAIN */
   .container-details-food {
     margin-top: 35%;
-    border-radius: 80px 80px 0 0;    
+    border-radius: 32px 32px 0 0;
   }
 
   .details-image-recipe {
-    margin: -130px auto 60px;
+    margin: -20% auto 60px;
     width: 35%;
   }
 
@@ -243,29 +257,34 @@
   .container-recipe-introduction {
     margin: 20px auto;
   }
-
+  
   .share-icon, .favorite-icon {
-    width: 50px;
+    width: 40px;
+    margin: 10px;
+  }
+
+  .btn-share-copied {
+    font-size: 12px;
   }
 
   /* CONTAINER NAME CATEGORY */
   .recipe-name-category {
-    margin: 0 70px;
+    margin: 0 40px;
   }
 
   .recipe-name {
-    font-size: 36px;
+    font-size: 26px;
     margin-bottom: 15px !important;
   }
 
   .recipe-line {
-    width: 135px;
-    height: 10px;
+    width: 120px;
+    height: 6px;
     margin-bottom: 15px !important;
   }
 
   .recipe-category {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   /* INGREDIENTS */
@@ -273,7 +292,7 @@
     margin: 5px auto;
     text-align: center;
     letter-spacing: 3px;
-    font-size: 28px;
+    font-size: 20px;
   }
 
   /* INSTRUCTIONS */
@@ -283,7 +302,7 @@
   }
 
   .container-instructions p {
-    font-size: 28px;
+    font-size: 20px;
   }
 
   /* VIDEO */
@@ -293,7 +312,7 @@
 
   /* CONTAINER RECOMMENDATIONS */
   .carousel-title {
-    font-size: 36px;
+    font-size: 26px;
   }
 
   .carousel-scroll {
@@ -303,20 +322,20 @@
 
   .card-image {
     width: 35vw;
-    margin: 30px 55px;  
+    margin: 40px;  
   }
 
   .card-name {
-    font-size: 28px;
+    font-size: 24px;
   }
 
   /* BUTTON */
   .btn-details {
     margin: 20px 0;
     padding: 10px 5px;
-    width: 40%;
-    border-radius: 18px;
-    font-size: 28px;
+    width: 50%;
+    border-radius: 14px;
+    font-size: 24px;
   }
 }
 
@@ -324,11 +343,11 @@
   /* CONTAINER MAIN */
   .container-details-food {
     margin-top: 100px;
-    border-radius: 32px 32px 0px 0px;    
+    border-radius: 28px 28px 0px 0px;    
   }
 
   .details-image-recipe {
-    margin: -70px auto 25px;
+    margin: -20% auto 25px;
     width: 35%;
   }
 
@@ -340,10 +359,18 @@
   .share-icon, .favorite-icon {
     width: 20px;
   }
+
+  .btn-share, .btn-favorite {
+    width: 60px;
+  }
+
+  .btn-share-copied {
+    font-size: 10px;
+  }
   
   /* CONTAINER NAME CATEGORY */
   .recipe-name-category {
-    margin: 0 40px;
+    margin: 0 20px;
   }
 
   .recipe-name {
@@ -385,7 +412,6 @@
     display: flex;
     align-items: center;
   }
-
 
   /* CONTAINER RECOMMENDATIONS */
   .carousel-title {
