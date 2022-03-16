@@ -2,13 +2,13 @@ import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
-function Home() {
+function Drinks() {
   return (
     <>
-      <Header title="Foods" />
+      <Header title="Drinks" />
       <Footer />
     </>
   );
 }
 
-export default Home;
+export default Drinks;
