@@ -1,41 +1,65 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 import '../assets/css/Header.css';
 
-function Header() {
+function Header(props) {
+  const { title } = props;
+
   const history = useHistory();
   const toProfile = () => {
     history.push('/profile');
   };
 
   const [showBar, setShowBar] = useState(false);
+  const [inputText, setInputText] = useState('');
+  const [filter, setFilter] = useState('ingredient');
+
+  const handleSubmit = () => {
+    if (filter === 'first-letter') {
+      global.alert('Your search must have only 1 (one) character');
+    }
+  };
+
+  function filterRadio(e) {
+    const { value } = e.target;
+    setFilter(value);
+  }
 
   const searchBar = () => (
     <>
-      <input data-testid="search-input" />
+      <input
+        data-testid="search-input"
+        value={ inputText }
+        onChange={ ({ target: { value } }) => setInputText(value) }
+      />
       <input
         type="radio"
         name="searchRadio"
         data-testid="ingredient-search-radio"
         label="Ingrediente"
+        onChange={ (e) => filterRadio(e) }
       />
       <input
         type="radio"
         name="searchRadio"
         data-testid="name-search-radio"
         label="Nome"
+        onChange={ (e) => filterRadio(e) }
       />
       <input
         type="radio"
         name="searchRadio"
         data-testid="first-letter-search-radio"
         label="Primeira Letra"
+        onChange={ (e) => filterRadio(e) }
       />
       <button
         type="button"
         data-testid="exec-search-btn"
+        onClick={ () => handleSubmit() }
       >
         Filtrar
       </button>
@@ -56,6 +80,7 @@ function Header() {
           alt="searchIcon"
         />
       </button>
+      <h1 data-testid="page-title">{title}</h1>
       <div className="container-title">
         <h1 className="header-title" data-testid="page-title">Nome App</h1>
         <div className="title-line" />
@@ -73,8 +98,13 @@ function Header() {
           alt="profileIcon"
         />
       </button>
+      { showBar && searchBar() }
     </header>
   );
 }
+
+Header.propTypes = {
+  title: PropTypes.string,
+}.isRequired;
 
 export default Header;
