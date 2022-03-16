@@ -15,6 +15,7 @@ import ExplorerIngredients from './pages/ExplorerIngredients';
 import NotFound from './pages/NotFound';
 import ExplorerNationalities from './pages/ExplorerNationalities';
 import './assets/css/App.css';
+import InProgress from './pages/InProgress';
 
 function App() {
   return (
@@ -32,6 +33,11 @@ function App() {
             exact
             path="/drinks/:id"
             render={ (props) => <DetailsDrink { ...props } /> }
+          />
+          <Route
+            exact
+            path="/:foodsAndDrinks/:id/in-progress"
+            render={ (props) => <InProgress { ...props } /> }
           />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/done-recipes" component={ Done } />
