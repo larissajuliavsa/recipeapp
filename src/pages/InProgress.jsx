@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import RecipeContext from '../context/RecipeContext';
 import getDetailsFoodAPI from '../services/detailsFoodAPI';
+import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
 
 import {
   addRecipeLocalStorage,
@@ -18,52 +18,55 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 
 const copy = require('clipboard-copy');
 
+const TYPE = 'foods';
+
 function InProgress() {
-  const {
-    renderDetailsFood,
-    setRenderDetailsFood,
-    ingredientsFood,
-    setIngredientsFood,
-    measureFood,
-    setMeasureFood,
-  } = useContext(RecipeContext);
+  const [renderDetails, setRenderDetails] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+  const [measure, setMeasure] = useState([]);
+
   const [messageCopied, setMessageCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   // const [buttonDisabled, setButtonDisabled] = useState(true);
 
-  const { id } = useParams();
-  const location = useLocation();
-  // const history = useHistory();useHistory
+  const { id, foodsAndDrinks } = useParams();
+
+  const TYPES_RECIPES = foodsAndDrinks === TYPE ? 'Meal' : 'Drink';
 
   useEffect(() => {
-    async function recipeFoodAPI() {
-      const recipeAPI = await getDetailsFoodAPI(id);
-      setRenderDetailsFood(recipeAPI.meals[0]);
+    async function foodsAndDrinksAPI() {
+      if (foodsAndDrinks === TYPE) {
+        const recipeAPI = await getDetailsFoodAPI(id);
+        setRenderDetails(recipeAPI.meals[0]);
+      } else {
+        const recipeAPI = await getDetailsDrinkAPI(id);
+        setRenderDetails(recipeAPI.drinks[0]);
+      }
     }
-    recipeFoodAPI();
+    foodsAndDrinksAPI();
   }, []);
 
   useEffect(() => {
-    const ingredientKeys = Object.keys(renderDetailsFood)
+    const ingredientKeys = Object.keys(renderDetails)
       .filter((e) => e.includes('strIngredient'));
-    const measureKeys = Object.keys(renderDetailsFood)
+    const measureKeys = Object.keys(renderDetails)
       .filter((e) => e.includes('strMeasure'));
 
     const ingredientValues = ingredientKeys.map(
-      (ele) => renderDetailsFood[ele],
+      (ele) => renderDetails[ele],
     );
-    const measureValues = measureKeys.map((ele) => renderDetailsFood[ele]);
+    const measureValues = measureKeys.map((ele) => renderDetails[ele]);
 
-    setIngredientsFood(ingredientValues);
-    setMeasureFood(measureValues.filter((e) => e !== ' '));
-  }, [renderDetailsFood]);
+    setIngredients(ingredientValues);
+    setMeasure(measureValues.filter((e) => e !== ' ' && e !== '' && e !== null));
+  }, [renderDetails]);
 
   useEffect(() => {
     setIsFavorite(checkLocalStorage(id));
   }, []);
 
   function saveLinkClipBoard() {
-    copy(`http://localhost:3000${location.pathname}`);
+    copy(`http://localhost:3000/${foodsAndDrinks}/${id}`);
     setMessageCopied(true);
     const setIntervalId = setInterval(() => {
       clearInterval(setIntervalId);
@@ -72,7 +75,7 @@ function InProgress() {
   }
 
   function addRecipeFavorite() {
-    addRecipeLocalStorage(renderDetailsFood, 'Meal');
+    addRecipeLocalStorage(renderDetails, TYPES_RECIPES);
     setIsFavorite(true);
   }
 
@@ -81,12 +84,18 @@ function InProgress() {
     setIsFavorite(false);
   }
 
-  console.log(measureFood);
+  const {
+    strInstructions,
+    strCategory,
+    strAlcoholic,
+    [`str${TYPES_RECIPES}`]: name,
+    [`str${TYPES_RECIPES}Thumb`]: image,
+  } = renderDetails;
 
   return (
     <main className="container-details-food">
       <img
-        src={ renderDetailsFood.strMealThumb }
+        src={ image }
         className="details-image-recipe"
         alt="Foto da Receita"
         data-testid="recipe-photo"
@@ -107,11 +116,11 @@ function InProgress() {
         </button>
         <div className="recipe-name-category">
           <h3 className="recipe-name" data-testid="recipe-title">
-            {renderDetailsFood.strMeal}
+            {name}
           </h3>
           <div className="recipe-line" />
           <p className="recipe-category" data-testid="recipe-category">
-            {renderDetailsFood.strCategory}
+            {foodsAndDrinks === TYPE ? strCategory : strAlcoholic}
           </p>
         </div>
         <button
@@ -128,26 +137,26 @@ function InProgress() {
         </button>
       </div>
       <div className="container-ingredient">
-        {measureFood.length > 0
-            && measureFood.map((measure, index) => (
+        {measure.length > 0
+            && measure.map((element, index) => (
               <label
-                htmlFor={ `${index}-ingredient-name-and-measure` }
+                htmlFor={ `${index}-ingredient-step` }
                 key={ index }
                 className="ingredient-measure"
+                data-testid={ `${index}-ingredient-step` }
               >
                 <input
                   type="checkbox"
-                  data-testid={ `${index}-ingredient-name-and-measure` }
-                  id={ `${index}-ingredient-name-and-measure` }
+                  id={ `${index}-ingredient-step` }
                 />
-                {ingredientsFood[index]}
+                {ingredients[index]}
                 {' '}
-                <span>{measure}</span>
+                <span>{element}</span>
               </label>
             ))}
       </div>
       <div className="container-instructions">
-        <p data-testid="instructions">{renderDetailsFood.strInstructions}</p>
+        <p data-testid="instructions">{strInstructions}</p>
       </div>
       <button
         className="btn-details"
