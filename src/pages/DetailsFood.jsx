@@ -5,7 +5,6 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import YouTube from 'react-youtube';
 
 import RecipeContext from '../context/RecipeContext';
-import Header from '../components/Header';
 import getDetailsFoodAPI from '../services/detailsFoodAPI';
 import getRecommendationFoodAPI from '../services/recommendationFoodAPI';
 
@@ -16,10 +15,11 @@ import {
 } from '../services/functions';
 import { opts, API_LENGTH, TIMER_MESSAGE } from '../helpers/constants';
 
-import '../assets/css/DetailsFood.css';
+import '../assets/css/Details.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import backIcon from '../images/backIcon.svg';
 
 const getYouTubeID = require('get-youtube-id');
 
@@ -167,10 +167,15 @@ function DetailsFood() {
 
   return (
     <>
-      <header>
-        <Header />
-      </header>
-      <main className="container-details-food">
+      <button
+        onClick={ () => history.push('/foods') }
+        type="button"
+        className="btn-back-home"
+      >
+        <img src={ backIcon } alt="Back to search home" />
+        <p className="btn-home-name">Foods</p>
+      </button>
+      <main className="container-details-main">
         <img
           src={ renderDetailsFood.strMealThumb }
           className="details-image-recipe"
@@ -178,7 +183,6 @@ function DetailsFood() {
           data-testid="recipe-photo"
         />
         <div className="container-recipe-introduction">
-          {messageCopied && <p>Link copied!</p>}
           <button
             className="btn-share"
             type="button"
@@ -190,6 +194,7 @@ function DetailsFood() {
               src={ shareIcon }
               alt="Compartilhar Receita"
             />
+            {messageCopied && <p className="btn-share-copied">Link copied!</p>}
           </button>
           <div className="recipe-name-category">
             <h3 className="recipe-name" data-testid="recipe-title">
