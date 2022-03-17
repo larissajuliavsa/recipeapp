@@ -1,3 +1,5 @@
+/* stylelint-disable declaration-no-important */
+
 /* BUTTON BACK FOODS */
 .btn-back-home {
   align-items: center;
@@ -13,15 +15,6 @@
   font-weight: 500;
   margin-bottom: 0 ! important;
   margin-left: 10px;
-}
-
-.btn-back-home:hover {
-  transform: translateY(-3px);
-  transition: 0.3s ease-in-out;
-}
-
-.btn-back-home:active {
-  transform: translateY(0);
 }
 
 /* CONTAINER MAIN */

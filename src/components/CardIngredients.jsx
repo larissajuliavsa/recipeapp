@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './CardIngredients.css';
+import '../assets/css/CardIngredients.css';
 
 function CardIngredients({ ingredient, index, history, params }) {
   console.log(ingredient);
@@ -11,16 +11,22 @@ function CardIngredients({ ingredient, index, history, params }) {
   return (
     <button
       type="button"
+      className="btn-ingredient-card"
       data-testid={ `${index}-ingredient-card` }
       onClick={ () => btnRedirectRoute() }
     >
       <img
         data-testid={ `${index}-card-img` }
-        className="card-img-ingredients"
+        className="card-img-ingredient"
         src={ params === 'foods' ? `https://www.themealdb.com/images/ingredients/${ingredient}-Small.png` : `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Small.png` }
         alt={ ingredient }
       />
-      <h4 data-testid={ `${index}-card-name` }>{ingredient}</h4>
+      <h4
+        className="card-title-ingredient"
+        data-testid={ `${index}-card-name` }
+      >
+        {ingredient}
+      </h4>
     </button>
   );
 }
