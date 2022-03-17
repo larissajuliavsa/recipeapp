@@ -20,6 +20,8 @@ function RecipeProvider({ children }) {
 
   const [videoId, setVideoId] = useState('');
 
+  const [buttonDisabled, setButtonDisabled] = useState(true);
+
   const isLoginButtonDisabled = () => {
     const MIN_LENGTH = 6;
     const validate = loginEmail.includes('@' && '.com');
@@ -40,6 +42,16 @@ function RecipeProvider({ children }) {
       setLoginPassword(value);
     }
     isLoginButtonDisabled();
+  };
+
+  const enableButton = (id, type, measure) => {
+    const inProgressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const mealsOrCocktails = type === 'Meal' ? 'meals' : 'cocktails';
+    if (inProgressRecipes[mealsOrCocktails][id].length === measure.length) {
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
   };
 
   const valueProvider = {
@@ -65,6 +77,8 @@ function RecipeProvider({ children }) {
     setRecommendationFood,
     recommendationDrink,
     setRecommendationDrink,
+    buttonDisabled,
+    enableButton,
   };
 
   return (

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
 import getDetailsFoodAPI from '../services/detailsFoodAPI';
 import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
 
 import {
+  addAndRemoveIngredient,
   addRecipeLocalStorage,
+  checkbokLocalStorage,
   checkLocalStorage,
   removeRecipeLocalStorage,
 } from '../services/functions';
@@ -15,19 +18,19 @@ import '../assets/css/DetailsFood.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import RecipeContext from '../context/RecipeContext';
 
 const copy = require('clipboard-copy');
 
 const TYPE = 'foods';
 
-function InProgress() {
+function InProgress({ history }) {
   const [renderDetails, setRenderDetails] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [measure, setMeasure] = useState([]);
-
   const [messageCopied, setMessageCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  // const [buttonDisabled, setButtonDisabled] = useState(true);
+  const { buttonDisabled, enableButton } = useContext(RecipeContext);
 
   const { id, foodsAndDrinks } = useParams();
 
@@ -148,9 +151,16 @@ function InProgress() {
                 <input
                   type="checkbox"
                   id={ `${index}-ingredient-step` }
+                  defaultChecked={
+                    checkbokLocalStorage(id, TYPES_RECIPES, ingredients[index])
+                  }
+                  onClick={ () => {
+                    addAndRemoveIngredient(id, ingredients[index], TYPES_RECIPES);
+                    enableButton(id, TYPES_RECIPES, measure);
+                  } }
                 />
                 {ingredients[index]}
-                {' '}
+                {'-'}
                 <span>{element}</span>
               </label>
             ))}
@@ -162,12 +172,19 @@ function InProgress() {
         className="btn-details"
         type="button"
         data-testid="finish-recipe-btn"
-        // disabled={ buttonDisabled }
+        disabled={ buttonDisabled }
+        onClick={ () => history.push('/done-recipes') }
       >
         Finish Recipe
       </button>
     </main>
   );
 }
+
+InProgress.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default InProgress;
