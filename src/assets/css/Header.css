@@ -1,3 +1,5 @@
+/* stylelint-disable declaration-no-important */
+
 /* CONTAINER HEADER */
 .container-header {
   background-color: white;
@@ -17,6 +19,15 @@
 .header-btn-search, .header-btn-profile {
   background-color: white;
   border: none;
+}
+
+.header-btn-search:hover, .header-btn-profile:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.header-btn-search:active, .header-btn-profile:active {
+  transform: translateY(0);
 }
 
 /* TITLE PAGE */

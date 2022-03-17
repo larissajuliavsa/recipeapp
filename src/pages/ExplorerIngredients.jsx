@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import CardIngredients from '../components/CardIngredients';
 import Footer from '../components/Footer';
 import {
   getIngredientsOfDrink,
   getIngredientsOfMeal,
 } from '../services/AllRecipeIngredients';
-import CardIngredients from '../components/CardIngredients';
+import backIcon from '../images/backIcon.svg';
+import '../assets/css/ExplorerTypes.css';
+import '../assets/css/CardIngredients.css';
 
 const QUANTITY_OF_INGREDIENTS = 12;
 
@@ -49,17 +52,27 @@ function ExplorerIngredients(props) {
   );
 
   return (
-    <div>
-      {
-        foodsAndDrinks === 'foods'
-          ? (
-            renderCard(ingredientsMeals, 'strIngredient')
-          ) : (
-            renderCard(ingredientsDrinks, 'strIngredient1')
-          )
-      }
+    <>
+      <button
+        onClick={ () => history.push('/explore') }
+        type="button"
+        className="btn-back-explore"
+      >
+        <img src={ backIcon } alt="Back to explore" />
+        <p className="btn-explore-name">Explore</p>
+      </button>
+      <section className="container-ingredients">
+        {
+          foodsAndDrinks === 'foods'
+            ? (
+              renderCard(ingredientsMeals, 'strIngredient')
+            ) : (
+              renderCard(ingredientsDrinks, 'strIngredient1')
+            )
+        }
+      </section>
       <Footer />
-    </div>
+    </>
   );
 }
 
