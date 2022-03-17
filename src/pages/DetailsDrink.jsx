@@ -1,29 +1,29 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 
 import RecipeContext from '../context/RecipeContext';
 import getRecommendationDrinkAPI from '../services/recommendationDrinkAPI';
 
-// import '../assets/DetailsFood.css';
-
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
 import {
   addRecipeLocalStorage,
   checkLocalStorage,
   removeRecipeLocalStorage } from '../services/functions';
+
+import '../assets/css/Details.css';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import backIcon from '../images/backIcon.svg';
 
 const copy = require('clipboard-copy');
 
 const API_LENGTH = 6;
 const TIMER_MESSAGE = 2000;
 
-function DetailsDrink({ history }) {
-  const { location: { pathname } } = history;
+function DetailsDrink() {
+  const location = useLocation();
 
   const {
     renderDetailsDrink,
@@ -38,6 +38,7 @@ function DetailsDrink({ history }) {
   const [messageCopied, setMessageCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
+  const history = useHistory();
 
   const inProgressKey = JSON.parse(localStorage.getItem('inProgressRecipes'));
 
@@ -74,7 +75,7 @@ function DetailsDrink({ history }) {
   function mealsCarousel() {
     return (
       <div className="container-carousel">
-        <p>Recommendations to this recipe</p>
+        <p className="carousel-title">Recommendations</p>
         <div className="carousel-scroll">
           {recommendationDrink.map((drink, index) => (
             <div
@@ -98,7 +99,7 @@ function DetailsDrink({ history }) {
   }
 
   function saveLinkClipBoard() {
-    copy(`http://localhost:3000${pathname}`);
+    copy(`http://localhost:3000${location.pathname}`);
     setMessageCopied(true);
     const setIntervalId = setInterval(() => {
       clearInterval(setIntervalId);
@@ -151,59 +152,91 @@ function DetailsDrink({ history }) {
   }
 
   return (
-    <main>
-      <img
-        src={ renderDetailsDrink.strDrinkThumb }
-        style={ { width: '10%' } }
-        alt="Foto do Drink"
-        data-testid="recipe-photo"
-      />
-      <h3 data-testid="recipe-title">{renderDetailsDrink.strDrink}</h3>
-      { messageCopied && (<p><b>Link copied!</b></p>)}
+    <>
       <button
+        onClick={ () => history.push('/drinks') }
         type="button"
-        data-testid="share-btn"
-        onClick={ saveLinkClipBoard }
+        className="btn-back-home"
       >
-        <img src={ shareIcon } alt="Compartilhar Receita" />
+        <img src={ backIcon } alt="Back to search home" />
+        <p className="btn-home-name">Drinks</p>
       </button>
-      <button
-        type="button"
-        onClick={
-          isFavorite
-            ? removeRecipeFavorite
-            : addRecipeFavorite
-        }
-      >
+      <main className="container-details-main">
         <img
-          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-          alt="Favoritar Receita"
-          data-testid="favorite-btn"
+          className="details-image-recipe"
+          src={ renderDetailsDrink.strDrinkThumb }
+          alt="Foto do Drink"
+          data-testid="recipe-photo"
         />
-      </button>
-      <p data-testid="recipe-category">{renderDetailsDrink.strAlcoholic}</p>
-      {measureDrink.length > 0
-        && measureDrink.map((measure, index) => (
-          <p key={ index } data-testid={ `${index}-ingredient-name-and-measure` }>
-            {ingredientsDrink[index]}
-            {' '}
-            {measure}
-          </p>
-        ))}
-      <p data-testid="instructions">{renderDetailsDrink.strInstructions}</p>
-      {mealsCarousel()}
-      {buttonRecipe()}
-    </main>
+        <div className="container-recipe-introduction">
+          <button
+            className="btn-share"
+            type="button"
+            data-testid="share-btn"
+            onClick={ saveLinkClipBoard }
+          >
+            <img
+              className="share-icon"
+              src={ shareIcon }
+              alt="Compartilhar Receita"
+            />
+            { messageCopied && <p className="btn-share-copied">Link copied!</p>}
+          </button>
+          <div className="recipe-name-category">
+            <h3
+              className="recipe-name"
+              data-testid="recipe-title"
+            >
+              {renderDetailsDrink.strDrink}
+            </h3>
+            <div className="recipe-line" />
+            <p
+              className="recipe-category"
+              data-testid="recipe-category"
+            >
+              {renderDetailsDrink.strAlcoholic}
+            </p>
+          </div>
+          <button
+            className="btn-favorite"
+            type="button"
+            onClick={
+              isFavorite
+                ? removeRecipeFavorite
+                : addRecipeFavorite
+            }
+          >
+            <img
+              className="favorite-icon"
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="Favoritar Receita"
+              data-testid="favorite-btn"
+            />
+          </button>
+        </div>
+        {/* <p data-testid="recipe-category">{renderDetailsDrink.strAlcoholic}</p> */}
+        <div className="container-ingredient">
+          {measureDrink.length > 0
+            && measureDrink.map((measure, index) => (
+              <p
+                className="ingredient-measure"
+                key={ index }
+                data-testid={ `${index}-ingredient-name-and-measure` }
+              >
+                {ingredientsDrink[index]}
+                {' '}
+                <span>{measure}</span>
+              </p>
+            ))}
+        </div>
+        <div className="container-instructions">
+          <p data-testid="instructions">{renderDetailsDrink.strInstructions}</p>
+        </div>
+        {mealsCarousel()}
+        {buttonRecipe()}
+      </main>
+    </>
   );
 }
-
-DetailsDrink.propTypes = {
-  history: PropTypes.shape({
-    push: PropTypes.func,
-    location: PropTypes.shape({
-      pathname: PropTypes.string,
-    }),
-  }).isRequired,
-};
 
 export default DetailsDrink;
