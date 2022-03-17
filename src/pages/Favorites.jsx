@@ -3,35 +3,34 @@ import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-// import { removeRecipeLocalStorage } from '../services/functions';
 
 const copy = require('clipboard-copy');
 
 const TIMER_MESSAGE = 2000;
 
 function Favorites() {
-  const favoriteRecipes = [
-    {
-      id: '52771',
-      type: 'food',
-      nationality: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    },
-    {
-      id: '178319',
-      type: 'drink',
-      nationality: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    },
-  ];
+  // const favoriteRecipes = [
+  //   {
+  //     id: '52771',
+  //     type: 'food',
+  //     nationality: 'Italian',
+  //     category: 'Vegetarian',
+  //     alcoholicOrNot: '',
+  //     name: 'Spicy Arrabiata Penne',
+  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+  //   },
+  //   {
+  //     id: '178319',
+  //     type: 'drink',
+  //     nationality: '',
+  //     category: 'Cocktail',
+  //     alcoholicOrNot: 'Alcoholic',
+  //     name: 'Aquamarine',
+  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+  //   },
+  // ];
 
-  localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
+  // localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 
   const [isFavorite, setIsFavorite] = useState([]);
   const [filterRecipe, setFilterRecipe] = useState([]);
@@ -63,22 +62,12 @@ function Favorites() {
     }, TIMER_MESSAGE);
   }
 
-  // function removeRecipeFavorite(id) {
-  //   removeRecipeLocalStorage(id);
-  //   setIsFavorite(false);
-  // }
-
   function removeItem(id) {
     const getFavorites = JSON.parse(localStorage.getItem('favoriteRecipes'));
     const favorites = getFavorites.filter((favorite) => favorite.id !== id);
     localStorage.setItem('favoriteRecipes', JSON.stringify(favorites));
+    setFilterRecipe(favorites);
   }
-
-  // const removeRecipeFavorite = (id) => {
-  //   // const newFavoriteArray = favoriteRecipes.filter((item) => item.id !== id);
-  //   removeItem(id);
-  //   setIsFavorite(favoriteRecipes);
-  // };
 
   return (
     <>
