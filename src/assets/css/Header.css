@@ -19,6 +19,15 @@
   border: none;
 }
 
+.header-btn-search:hover, .header-btn-profile:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.header-btn-search:active, .header-btn-profile:active {
+  transform: translateY(0);
+}
+
 /* TITLE PAGE */
 .container-title {
   align-items: center;
@@ -29,7 +38,7 @@
 .header-title {
   color: #00d76b;
   font-weight: 600;
-  margin-bottom: 0 ! important;
+  margin-bottom: 0;
   text-transform: uppercase;
 }
 
@@ -45,7 +54,7 @@
 }
 
 .container-filters {
-  align-items: center;
+  align-items: baseline;
   display: flex;
   flex-direction: row;
 }
@@ -63,6 +72,10 @@
 
 .ingredient-title, .name-title, .first-letter-title {
   color: #3e3e3e;
+}
+
+.ingredient-radio, .name-radio, .first-letter-radio, .filter-btn {
+  margin-bottom: 1rem;
 }
 
 .filter-btn {
@@ -119,7 +132,6 @@
 
   .ingredient-title, .name-title, .first-letter-title {
     font-size: 14px;
-    margin-bottom: 0 ! important;
     margin-left: 5px;
   }
 
@@ -169,7 +181,6 @@
 
   .ingredient-title, .name-title, .first-letter-title {
     font-size: 14px;
-    margin-bottom: 0 ! important;
     margin-left: 5px;
   }
 
@@ -214,20 +225,17 @@
 
   /* FILTERS */
   .filter-ingredient, .filter-name, .filter-first-letter {
-    margin: 5px 8px;
+    margin: 5px;
   }
 
   .ingredient-title, .name-title, .first-letter-title {
     font-size: 12px;
-    margin-bottom: 0 ! important;
-    margin-left: 5px;
   }
 
   /* FILTER BUTTON */
   .filter-btn {
     border-radius: 6px;
     font-size: 10px;
-    margin: 0 5px;
     padding: 3px 10px;
   }
 }

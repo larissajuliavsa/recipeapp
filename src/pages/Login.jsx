@@ -26,7 +26,7 @@ function Login({ history }) {
     <div>
       <form className="container-login">
         <div className="container-name">
-          <p>Nome App</p>
+          <p>MasterFOods</p>
           <div className="name-line" />
         </div>
         <div className="container-email">

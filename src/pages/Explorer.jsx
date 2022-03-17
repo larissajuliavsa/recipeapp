@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
+import '../assets/css/Explorer.css';
 
 function Explorer({ history }) {
   const btnRedirectRoute = (route) => {
@@ -10,20 +11,24 @@ function Explorer({ history }) {
   return (
     <div>
       <span>Tela Explore na rota /explorer</span>
-      <button
-        type="button"
-        data-testid="explore-foods"
-        onClick={ () => btnRedirectRoute('foods') }
-      >
-        Explore Foods
-      </button>
-      <button
-        type="button"
-        data-testid="explore-drinks"
-        onClick={ () => btnRedirectRoute('drinks') }
-      >
-        Explore Drinks
-      </button>
+      <section className="container-explorer">
+        <button
+          className="explorer-foods"
+          type="button"
+          data-testid="explore-foods"
+          onClick={ () => btnRedirectRoute('foods') }
+        >
+          Explore Foods
+        </button>
+        <button
+          className="explorer-drinks"
+          type="button"
+          data-testid="explore-drinks"
+          onClick={ () => btnRedirectRoute('drinks') }
+        >
+          Explore Drinks
+        </button>
+      </section>
       <Footer />
     </div>
   );
