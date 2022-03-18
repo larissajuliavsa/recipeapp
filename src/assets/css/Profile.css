@@ -1,0 +1,55 @@
+/* CONTAINER MAIN */
+.container-profile {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 60vh;
+  justify-content: flex-end;
+}
+
+/* EMAIL */
+.profile-email {
+  font-weight: 600;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+/* BUTTONS */
+.profile-favorite-btn {
+  padding: 8px 15px;
+}
+
+.profile-done-btn {
+  padding: 8px 27px;
+}
+
+.profile-logout-btn {
+  padding: 7px 52px;
+}
+
+.profile-done-btn, .profile-favorite-btn, .profile-logout-btn {
+  background-color: #00d76b;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  margin: 20px 0;
+}
+
+.profile-favorite-btn:hover, .profile-done-btn:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.profile-favorite-btn:active, .profile-done-btn:active {
+  transform: translateY(0);
+}
+
+.profile-logout-btn:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.profile-logout-btn:active {
+  transform: translateY(0);
+}
