@@ -1,0 +1,28 @@
+.container-explorer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: space-evenly;
+  margin: auto;
+}
+
+.explorer-foods, .explorer-drinks {
+  background-color: #00d76b;
+  border: none;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px , rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 8px 15px;
+}
+
+.explorer-foods:hover, .explorer-drinks:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.explorer-foods:active, .explorer-drinks:active {
+  transform: translateY(0);
+}

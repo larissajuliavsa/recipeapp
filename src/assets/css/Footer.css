@@ -1,0 +1,41 @@
+/* CONTAINER POSITION FIXED */
+.container-footer {
+  align-items: center;
+  background-color: white;
+  border-radius: 25px 25px 0 0;
+  bottom: 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  padding: 20px;
+  position: fixed;
+  width: 100%;
+}
+
+/* CONTAINER DISPLAY FLEXED */
+.footer-icons {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+/* ICONS */
+.footer-drinks, .footer-explore, .footer-foods {
+  color: #00d76b;
+}
+
+.footer-drinks, .footer-explore {
+  width: 25px;
+}
+
+.footer-foods {
+  width: 15px;
+}
+
+.footer-drinks:hover, .footer-explore:hover, .footer-foods:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.footer-drinks:active, .footer-explore:active, .footer-foods:active {
+  transform: translateY(0);
+}

@@ -5,6 +5,8 @@ import {
   getAletorieRecipeDrink,
   getAletorieRecipeFood,
 } from '../services/AletoriesRecipes';
+import backIcon from '../images/backIcon.svg';
+import '../assets/css/ExplorerTypes.css';
 
 function ExplorerTypes(props) {
   const { history, match } = props;
@@ -35,34 +37,47 @@ function ExplorerTypes(props) {
   };
 
   return (
-    <div>
+    <>
+      <button
+        onClick={ () => history.push('/explore') }
+        type="button"
+        className="btn-back-explore"
+      >
+        <img src={ backIcon } alt="Back to explore" />
+        <p className="btn-explore-name">Explore</p>
+      </button>
       <span>Tela ExploreTypes na rota /explorer/:foodsAndDrinks</span>
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => btnRedirectRoute('ingredients') }
-      >
-        By Ingredient
-      </button>
-      {
-        foodsAndDrinks === 'foods' && (
-          <button
-            type="button"
-            data-testid="explore-by-nationality"
-            onClick={ () => btnRedirectRoute('nationalities') }
-          >
-            By Nationality
-          </button>)
-      }
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => btnSurprise() }
-      >
-        Surprise me!
-      </button>
-      <Footer />
-    </div>
+      <section className="container-types">
+        <button
+          className="types-ingredient"
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => btnRedirectRoute('ingredients') }
+        >
+          By Ingredient
+        </button>
+        {
+          foodsAndDrinks === 'foods' && (
+            <button
+              className="types-nationality"
+              type="button"
+              data-testid="explore-by-nationality"
+              onClick={ () => btnRedirectRoute('nationalities') }
+            >
+              By Nationality
+            </button>)
+        }
+        <button
+          className="types-surprise"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ () => btnSurprise() }
+        >
+          Surprise me!
+        </button>
+        <Footer />
+      </section>
+    </>
   );
 }
 

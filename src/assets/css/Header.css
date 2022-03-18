@@ -1,8 +1,8 @@
 /* CONTAINER HEADER */
 .container-header {
-  background-color: #FFFF;
-  border-radius: 0px 0px 25px 25px;
-  box-shadow: 0px 4px 9px rgba(149, 149, 149, 0.274);
+  background-color: white;
+  border-radius: 0 0 25px 25px;
+  box-shadow: 0 4px 9px rgba(149, 149, 149, 0.274);
 }
 
 /* CONTAINER SEARCH TITLE PROFILE */
@@ -19,6 +19,15 @@
   border: none;
 }
 
+.header-btn-search:hover, .header-btn-profile:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.header-btn-search:active, .header-btn-profile:active {
+  transform: translateY(0);
+}
+
 /* TITLE PAGE */
 .container-title {
   align-items: center;
@@ -29,7 +38,7 @@
 .header-title {
   color: #00d76b;
   font-weight: 600;
-  margin-bottom: 0 !important;
+  margin-bottom: 0;
   text-transform: uppercase;
 }
 
@@ -45,14 +54,14 @@
 }
 
 .container-filters {
-  align-items: center;
+  align-items: baseline;
   display: flex;
   flex-direction: row;
 }
 
 .bar {
   border: none;
-  box-shadow: 0px 4px 9px rgba(149, 149, 149, 0.274);
+  box-shadow: 0 4px 9px rgba(149, 149, 149, 0.274);
 }
 
 .filter-ingredient, .filter-name, .filter-first-letter {
@@ -65,16 +74,30 @@
   color: #3e3e3e;
 }
 
+.ingredient-radio, .name-radio, .first-letter-radio, .filter-btn {
+  margin-bottom: 1rem;
+}
+
 .filter-btn {
   background-color: #00d76b;
   border: none;
-  box-shadow: 0px 4px 9px rgba(149, 149, 149, 0.274);
+  box-shadow: 0 4px 9px rgba(149, 149, 149, 0.274);
   color: white;
   font-weight: 600;
 }
 
-@media screen and (min-width: 771px) {
-  .container-header {    
+.filter-btn:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.filter-btn:active {
+  transform: translateY(0);
+}
+
+@media screen and ( min-width : 771px ) {
+
+  .container-header {
     margin: 0 auto;
     padding: 15px;
   }
@@ -109,7 +132,6 @@
 
   .ingredient-title, .name-title, .first-letter-title {
     font-size: 14px;
-    margin-bottom: 0 !important;
     margin-left: 5px;
   }
 
@@ -122,8 +144,9 @@
   }
 }
 
-@media screen and (max-width: 770px) {
-  .container-header {    
+@media screen and ( max-width : 770px ) {
+
+  .container-header {
     margin: 0 auto;
     padding: 20px;
   }
@@ -158,10 +181,9 @@
 
   .ingredient-title, .name-title, .first-letter-title {
     font-size: 14px;
-    margin-bottom: 0 !important;
     margin-left: 5px;
   }
-  
+
   /* FILTER BUTTON */
   .filter-btn {
     border-radius: 6px;
@@ -171,8 +193,9 @@
   }
 }
 
-@media screen and (max-width: 360px) {
-  .container-header {    
+@media screen and ( max-width : 360px ) {
+
+  .container-header {
     margin: 0 auto;
     padding: 20px;
   }
@@ -202,20 +225,17 @@
 
   /* FILTERS */
   .filter-ingredient, .filter-name, .filter-first-letter {
-    margin: 5px 8px;
+    margin: 5px;
   }
 
   .ingredient-title, .name-title, .first-letter-title {
     font-size: 12px;
-    margin-bottom: 0 !important;
-    margin-left: 5px;
   }
 
   /* FILTER BUTTON */
   .filter-btn {
     border-radius: 6px;
     font-size: 10px;
-    margin: 0 5px;
     padding: 3px 10px;
   }
 }
