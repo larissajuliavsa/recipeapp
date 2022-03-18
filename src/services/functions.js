@@ -74,9 +74,7 @@ function addIngredientLocalStorage(id, index, type) {
 
   if (meals[id] && type === 'Meal') {
     const allIgredients = meals[id];
-    console.log(allIgredients, '1');
     allIgredients.push(index);
-    console.log(allIgredients, '2');
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails,
       meals: { ...meals },
@@ -110,7 +108,6 @@ function addIngredientLocalStorage(id, index, type) {
 function removeIngredientLocalStorage(id, index, inProgressRecipes, mealsOrCocktails) {
   const { cocktails, meals } = inProgressRecipes;
   if (mealsOrCocktails === 'meals') {
-    console.log('caiu aqui');
     localStorage.setItem('inProgressRecipes', JSON.stringify({
       cocktails,
       meals: { ...meals, [id]: meals[id].filter((e) => e !== index) },
@@ -137,5 +134,49 @@ export function addAndRemoveIngredient(id, index, type) {
     }
   } else {
     addIngredientLocalStorage(id, index, type);
+  }
+}
+
+export function saveRecipeDoneLocalStorage(details, type) {
+  const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes'));
+
+  // This code snippet captures the end date of the recipe. Logic taken from: https://www.horadecodar.com.br/2021/04/03/como-pegar-a-data-atual-com-javascript/
+  // Method padStart: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+  const date = new Date();
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  const currentDate = `${day}/${month}/${year}`;
+
+  const {
+    [`id${type}`]: id,
+    strArea,
+    strCategory,
+    strAlcoholic,
+    [`str${type}`]: name,
+    [`str${type}Thumb`]: image,
+    strTags,
+  } = details;
+
+  const currentRecipe = {
+    id,
+    type: type === 'Drink' ? 'drink' : 'food',
+    nationality: type === 'Meal' ? strArea : '',
+    category: strCategory,
+    alcoholicOrNot: type === 'Drink' ? strAlcoholic : '',
+    name,
+    image,
+    doneDate: currentDate,
+    tags: type === 'Meal' ? strTags : [],
+  };
+
+  if (doneRecipes && doneRecipes.length > 0) {
+    localStorage.setItem('doneRecipes', JSON.stringify(
+      [...doneRecipes, currentRecipe],
+    ));
+  }
+
+  if (!doneRecipes || doneRecipes.length === 0) {
+    localStorage.setItem('doneRecipes', JSON.stringify([currentRecipe]));
   }
 }

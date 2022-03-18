@@ -11,10 +11,11 @@ import {
   checkbokLocalStorage,
   checkLocalStorage,
   removeRecipeLocalStorage,
+  saveRecipeDoneLocalStorage,
 } from '../services/functions';
 import { TIMER_MESSAGE } from '../helpers/constants';
 
-import '../assets/css/DetailsFood.css';
+import '../assets/css/Details.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
@@ -173,7 +174,10 @@ function InProgress({ history }) {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ buttonDisabled }
-        onClick={ () => history.push('/done-recipes') }
+        onClick={ () => {
+          saveRecipeDoneLocalStorage(renderDetails, TYPES_RECIPES);
+          history.push('/done-recipes');
+        } }
       >
         Finish Recipe
       </button>
