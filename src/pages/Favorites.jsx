@@ -9,30 +9,8 @@ const copy = require('clipboard-copy');
 const TIMER_MESSAGE = 2000;
 
 function Favorites() {
-  // const favoriteRecipes = [
-  //   {
-  //     id: '52771',
-  //     type: 'food',
-  //     nationality: 'Italian',
-  //     category: 'Vegetarian',
-  //     alcoholicOrNot: '',
-  //     name: 'Spicy Arrabiata Penne',
-  //     image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-  //   },
-  //   {
-  //     id: '178319',
-  //     type: 'drink',
-  //     nationality: '',
-  //     category: 'Cocktail',
-  //     alcoholicOrNot: 'Alcoholic',
-  //     name: 'Aquamarine',
-  //     image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-  //   },
-  // ];
-
-  // localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
-
-  const [isFavorite, setIsFavorite] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(JSON
+    .parse(localStorage.getItem('favoriteRecipes')));
   const [filterRecipe, setFilterRecipe] = useState([]);
   const [messageCopied, setMessageCopied] = useState(false);
 
@@ -96,7 +74,7 @@ function Favorites() {
         </button>
       </div>
       <div>
-        {filterRecipe.map((
+        {filterRecipe && filterRecipe.map((
           { id, nationality, category, alcoholicOrNot, name, image, type,
           }, index,
         ) => (

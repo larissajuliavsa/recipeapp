@@ -8,7 +8,8 @@ const copy = require('clipboard-copy');
 const TIMER_MESSAGE = 2000;
 
 function Done() {
-  const [doneRecipes, setDoneRecipes] = useState([]);
+  const [doneRecipes, setDoneRecipes] = useState(JSON
+    .parse(localStorage.getItem('favoriteRecipes')));
   const [filterRecipe, setFilterRecipe] = useState([]);
   const [messageCopied, setMessageCopied] = useState(false);
 
@@ -65,7 +66,7 @@ function Done() {
         </button>
       </div>
       <div>
-        {filterRecipe.map((
+        {filterRecipe && filterRecipe.map((
           { id, nationality, category, alcoholicOrNot, name, image, doneDate, tags, type,
           }, index,
         ) => (
