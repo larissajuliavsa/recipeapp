@@ -167,7 +167,7 @@ export function saveRecipeDoneLocalStorage(details, type) {
     name,
     image,
     doneDate: currentDate,
-    tags: type === 'Meal' ? strTags : [],
+    tags: type === 'Meal' ? [strTags] : [],
   };
 
   if (doneRecipes && doneRecipes.length > 0) {
