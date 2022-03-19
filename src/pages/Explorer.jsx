@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Footer from '../components/Footer';
 import '../assets/css/Explorer.css';
+import Header from '../components/Header';
 
 function Explorer({ history }) {
   const btnRedirectRoute = (route) => {
@@ -10,6 +11,7 @@ function Explorer({ history }) {
 
   return (
     <div>
+      <Header title="Explore" />
       <span>Tela Explore na rota /explorer</span>
       <section className="container-explorer">
         <button
