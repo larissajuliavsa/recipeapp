@@ -51,6 +51,7 @@
 .favorite-img {
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.24) 0 3px 8px;
+  cursor: pointer;
 }
 
 .favorite-category {
@@ -64,6 +65,7 @@
 }
 
 .favorite-name {
+  cursor: pointer;
   font-size: 12px;
   margin-bottom: 2px;
 }
