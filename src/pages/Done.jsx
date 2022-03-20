@@ -82,7 +82,6 @@ function Done() {
               data-testid={ `${index}-horizontal-image` }
               onClick={ () => history.push(`/${type}s/${id}`) }
               aria-hidden="true"
-              // width="200px"
             />
             <p
               className="favorite-category"
@@ -123,7 +122,7 @@ function Done() {
                 alt="Compartilhar Receita"
                 data-testid={ `${index}-horizontal-share-btn` }
               />
-              { messageCopied && <p>Link copied!</p> }
+              { messageCopied && <p className="btn-share-copied">Link copied!</p> }
             </button>
           </section>
         ))}

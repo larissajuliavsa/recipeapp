@@ -68,6 +68,7 @@
   cursor: pointer;
   font-size: 12px;
   margin-bottom: 2px;
+  text-align: center;
 }
 
 .favorite-date {
@@ -75,6 +76,11 @@
 }
 
 .favorite-btn {
+  background-color: white;
+  border: none;
+}
+
+.favorite-heart {
   background-color: white;
   border: none;
 }
@@ -103,6 +109,7 @@
   /* CONTAINER FAVORITES */
   .container-favorite {
     border-radius: 20px;
+    height: 220px;
     margin-bottom: 60px;
     margin-right: 35px;
     margin-top: 20px;
@@ -141,6 +148,26 @@
   .favorite-btn {
     margin-bottom: 10px;
   }
+
+  .favorite-btn, .favorite-heart {
+    margin-top: 10px;
+  }
+
+  .favorite-heart {
+    margin-left: 15px;
+  }
+
+  .icon-share, .icon-heart {
+    width: 20px;
+  }
+
+  .btn-share-copied {
+    font-size: 9px;
+    height: 10px;
+    margin-top: 5px;
+    text-align: center;
+    width: 20px;
+  }
 }
 
 @media screen and ( max-width : 770px ) {
@@ -167,6 +194,7 @@
   /* CONTAINER FAVORITES */
   .container-favorite {
     border-radius: 20px;
+    height: 210px;
     margin-bottom: 60px;
     margin-right: 35px;
     margin-top: 20px;
@@ -201,6 +229,25 @@
     font-size: 11px;
     margin-bottom: 8px;
   }
+
+  .favorite-btn, .favorite-heart {
+    margin-top: 5px;
+  }
+
+  .favorite-heart {
+    margin-left: 15px;
+  }
+
+  .icon-share, .icon-heart {
+    width: 15px;
+  }
+
+  .btn-share-copied {
+    font-size: 8px;
+    height: 10px;
+    margin-top: 5px;
+    width: 15px;
+  }
 }
 
 @media screen and ( max-width : 360px ) {
@@ -227,6 +274,7 @@
   /* CONTAINER FAVORITES */
   .container-favorite {
     border-radius: 20px;
+    height: 210px;
     margin-bottom: 60px;
     margin-right: 30px;
     margin-top: 20px;
@@ -260,5 +308,24 @@
   .favorite-date {
     font-size: 11px;
     margin-bottom: 8px;
+  }
+
+  .favorite-btn, .favorite-heart {
+    margin-top: 5px;
+  }
+
+  .favorite-heart {
+    margin-left: 15px;
+  }
+
+  .icon-share, .icon-heart {
+    width: 15px;
+  }
+
+  .btn-share-copied {
+    font-size: 8px;
+    height: 10px;
+    margin-top: 5px;
+    width: 15px;
   }
 }
