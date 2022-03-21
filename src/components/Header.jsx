@@ -70,7 +70,6 @@ function Header(props) {
   };
 
   const handleSubmit = () => {
-    console.log(handleSubmit);
     if (mealsOrDrinks === 'meals') {
       getMeals();
     } else {
@@ -189,7 +188,7 @@ function Header(props) {
 
 Header.propTypes = {
   title: PropTypes.string,
-  mealsOrDrinks: PropTypes.string.isRequired,
+  mealsOrDrinks: PropTypes.string,
 }.isRequired;
 
 export default Header;
