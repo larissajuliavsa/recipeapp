@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Header from '../components/Header';
 import shareIcon from '../images/shareIcon.svg';
+import '../assets/css/Done.css';
 
 const copy = require('clipboard-copy');
 
@@ -42,8 +43,9 @@ function Done() {
   return (
     <>
       <Header />
-      <div>
+      <section className="container-filter-btns">
         <button
+          className="filter-all"
           type="button"
           data-testid="filter-by-all-btn"
           onClick={ handleClick }
@@ -51,6 +53,7 @@ function Done() {
           All
         </button>
         <button
+          className="filter-food"
           type="button"
           data-testid="filter-by-food-btn"
           onClick={ () => filter('food') }
@@ -58,70 +61,72 @@ function Done() {
           Food
         </button>
         <button
+          className="filter-drink"
           type="button"
           data-testid="filter-by-drink-btn"
           onClick={ () => filter('drink') }
         >
           Drinks
         </button>
-      </div>
-      <div>
+      </section>
+      <section className="container-grid">
         {filterRecipe && filterRecipe.map((
           { id, nationality, category, alcoholicOrNot, name, image, doneDate, tags, type,
           }, index,
         ) => (
-          <div key={ id }>
+          <section className="container-favorite" key={ id }>
             <img
+              className="favorite-img"
               src={ image }
               alt={ `${name}` }
               data-testid={ `${index}-horizontal-image` }
               onClick={ () => history.push(`/${type}s/${id}`) }
               aria-hidden="true"
-              width="200px"
             />
-            <div>
-              <div data-testid={ `${index}-horizontal-top-text` }>
-                { nationality ? `${nationality} - ${category}` : `${alcoholicOrNot}` }
-              </div>
-              <div>
-                <button
-                  type="button"
-                  onClick={ () => saveLinkClipBoard(type, id) }
-                >
-                  <img
-                    src={ shareIcon }
-                    alt="Compartilhar Receita"
-                    data-testid={ `${index}-horizontal-share-btn` }
-                  />
-                </button>
-              </div>
-              <div
-                data-testid={ `${index}-horizontal-name` }
-                onClick={ () => history.push(`/${type}s/${id}`) }
-                aria-hidden="true"
+            <p
+              className="favorite-category"
+              data-testid={ `${index}-horizontal-top-text` }
+            >
+              { nationality ? `${nationality} ${category}` : `${alcoholicOrNot}` }
+            </p>
+            {tags.map((tag, indexTag) => (
+              <p
+                className="favorite-tag"
+                data-testid={ `${index}-${tag}-horizontal-tag` }
+                key={ indexTag }
               >
-                { name }
-              </div>
-              <div data-testid={ `${index}-horizontal-done-date` }>
-                { `Feita em: ${doneDate}` }
-              </div>
-              <div>
-                {tags.map((tag, indexTag) => (
-                  <div
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                    key={ indexTag }
-                  >
-                    {tag}
-                  </div>
-                ))}
-                <div>
-                  { messageCopied && (<p><b>Link copied!</b></p>)}
-                </div>
-              </div>
-            </div>
-          </div>
+                {tag}
+              </p>
+            ))}
+            <p
+              className="favorite-name"
+              data-testid={ `${index}-horizontal-name` }
+              onClick={ () => history.push(`/${type}s/${id}`) }
+              aria-hidden="true"
+            >
+              { name }
+            </p>
+            <p
+              className="favorite-date"
+              data-testid={ `${index}-horizontal-done-date` }
+            >
+              { doneDate }
+            </p>
+            <button
+              className="favorite-btn"
+              type="button"
+              onClick={ () => saveLinkClipBoard(type, id) }
+            >
+              <img
+                src={ shareIcon }
+                alt="Compartilhar Receita"
+                data-testid={ `${index}-horizontal-share-btn` }
+              />
+              { messageCopied && <p className="btn-share-copied">Link copied!</p> }
+            </button>
+          </section>
         ))}
-      </div>
+      </section>
     </>
   );
 }
