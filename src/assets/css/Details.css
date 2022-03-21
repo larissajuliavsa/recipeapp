@@ -8,6 +8,15 @@
   margin: 20px;
 }
 
+.btn-back-home:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease-in-out;
+}
+
+.btn-back-home:active {
+  transform: translateY(0);
+}
+
 .btn-back-home img {
   margin-bottom: 1rem;
 }
@@ -76,6 +85,16 @@
 }
 
 /* INGREDIENTS */
+.container-ingredient {
+  display: flex;
+  flex-direction: column;
+}
+
+.ingredient-checkbox {
+  background: #00d76b;
+  margin-right: 10px;
+}
+
 .ingredient-measure {
   text-align: center;
 }

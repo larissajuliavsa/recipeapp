@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
+import RecipeContext from '../context/RecipeContext';
 
 import getDetailsFoodAPI from '../services/detailsFoodAPI';
 import getDetailsDrinkAPI from '../services/detailsDrinkAPI';
@@ -15,11 +17,12 @@ import {
 } from '../services/functions';
 import { TIMER_MESSAGE } from '../helpers/constants';
 
-import '../assets/css/Details.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
-import RecipeContext from '../context/RecipeContext';
+import backIcon from '../images/backIcon.svg';
+
+import '../assets/css/Details.css';
 
 const copy = require('clipboard-copy');
 
@@ -56,13 +59,13 @@ function InProgress({ history }) {
     const measureKeys = Object.keys(renderDetails)
       .filter((e) => e.includes('strMeasure'));
 
-    const ingredientValues = ingredientKeys.map(
-      (ele) => renderDetails[ele],
-    );
+    const ingredientValues = ingredientKeys.map((ele) => renderDetails[ele]);
     const measureValues = measureKeys.map((ele) => renderDetails[ele]);
 
     setIngredients(ingredientValues);
-    setMeasure(measureValues.filter((e) => e !== ' ' && e !== '' && e !== null));
+    setMeasure(
+      measureValues.filter((e) => e !== ' ' && e !== '' && e !== null),
+    );
   }, [renderDetails]);
 
   useEffect(() => {
@@ -97,51 +100,60 @@ function InProgress({ history }) {
   } = renderDetails;
 
   return (
-    <main className="container-details-food">
-      <img
-        src={ image }
-        className="details-image-recipe"
-        alt="Foto da Receita"
-        data-testid="recipe-photo"
-      />
-      <div className="container-recipe-introduction">
-        {messageCopied && <p>Link copied!</p>}
-        <button
-          className="btn-share"
-          type="button"
-          data-testid="share-btn"
-          onClick={ saveLinkClipBoard }
-        >
-          <img
-            className="share-icon"
-            src={ shareIcon }
-            alt="Compartilhar Receita"
-          />
-        </button>
-        <div className="recipe-name-category">
-          <h3 className="recipe-name" data-testid="recipe-title">
-            {name}
-          </h3>
-          <div className="recipe-line" />
-          <p className="recipe-category" data-testid="recipe-category">
-            {foodsAndDrinks === TYPE ? strCategory : strAlcoholic}
-          </p>
+    <>
+      <button
+        onClick={ () => history.push('/explore') }
+        type="button"
+        className="btn-back-home"
+      >
+        <img src={ backIcon } alt="Back to search home" />
+        <p className="btn-home-name">Explore</p>
+      </button>
+      <main className="container-details-main">
+        <img
+          src={ image }
+          className="details-image-recipe"
+          alt="Foto da Receita"
+          data-testid="recipe-photo"
+        />
+        <div className="container-recipe-introduction">
+          <button
+            className="btn-share"
+            type="button"
+            data-testid="share-btn"
+            onClick={ saveLinkClipBoard }
+          >
+            <img
+              className="share-icon"
+              src={ shareIcon }
+              alt="Compartilhar Receita"
+            />
+            {messageCopied && <p className="btn-share-copied">Link copied!</p>}
+          </button>
+          <div className="recipe-name-category">
+            <h3 className="recipe-name" data-testid="recipe-title">
+              {name}
+            </h3>
+            <div className="recipe-line" />
+            <p className="recipe-category" data-testid="recipe-category">
+              {foodsAndDrinks === TYPE ? strCategory : strAlcoholic}
+            </p>
+          </div>
+          <button
+            className="btn-favorite"
+            type="button"
+            onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
+          >
+            <img
+              className="favorite-icon"
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="Favoritar Receita"
+              data-testid="favorite-btn"
+            />
+          </button>
         </div>
-        <button
-          className="btn-favorite"
-          type="button"
-          onClick={ isFavorite ? removeRecipeFavorite : addRecipeFavorite }
-        >
-          <img
-            className="favorite-icon"
-            src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-            alt="Favoritar Receita"
-            data-testid="favorite-btn"
-          />
-        </button>
-      </div>
-      <div className="container-ingredient">
-        {measure.length > 0
+        <div className="container-ingredient">
+          {measure.length > 0
             && measure.map((element, index) => (
               <label
                 htmlFor={ `${index}-ingredient-step` }
@@ -150,38 +162,42 @@ function InProgress({ history }) {
                 data-testid={ `${index}-ingredient-step` }
               >
                 <input
+                  className="ingredient-checkbox"
                   type="checkbox"
                   id={ `${index}-ingredient-step` }
-                  defaultChecked={
-                    checkbokLocalStorage(id, TYPES_RECIPES, ingredients[index])
-                  }
+                  defaultChecked={ checkbokLocalStorage(
+                    id,
+                    TYPES_RECIPES,
+                    ingredients[index],
+                  ) }
                   onClick={ () => {
                     addAndRemoveIngredient(id, ingredients[index], TYPES_RECIPES);
                     enableButton(id, TYPES_RECIPES, measure);
                   } }
                 />
                 {ingredients[index]}
-                {'-'}
+                {' '}
                 <span>{element}</span>
               </label>
             ))}
-      </div>
-      <div className="container-instructions">
-        <p data-testid="instructions">{strInstructions}</p>
-      </div>
-      <button
-        className="btn-details"
-        type="button"
-        data-testid="finish-recipe-btn"
-        disabled={ buttonDisabled }
-        onClick={ () => {
-          saveRecipeDoneLocalStorage(renderDetails, TYPES_RECIPES);
-          history.push('/done-recipes');
-        } }
-      >
-        Finish Recipe
-      </button>
-    </main>
+        </div>
+        <div className="container-instructions">
+          <p data-testid="instructions">{strInstructions}</p>
+        </div>
+        <button
+          className="btn-details"
+          type="button"
+          data-testid="finish-recipe-btn"
+          disabled={ buttonDisabled }
+          onClick={ () => {
+            saveRecipeDoneLocalStorage(renderDetails, TYPES_RECIPES);
+            history.push('/done-recipes');
+          } }
+        >
+          Finish Recipe
+        </button>
+      </main>
+    </>
   );
 }
 
