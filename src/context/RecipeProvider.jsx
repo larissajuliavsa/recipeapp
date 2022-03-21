@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipeContext from './RecipeContext';
+import * as radioAPI from '../services/radioAPI';
 
 function RecipeProvider({ children }) {
   const [loginEmail, setLoginEmail] = useState('');
@@ -24,6 +25,19 @@ function RecipeProvider({ children }) {
   const [videoId, setVideoId] = useState('');
 
   const [buttonDisabled, setButtonDisabled] = useState(true);
+
+  const [drinksData, setDrinksData] = useState([]);
+  const [mealsData, setMealsData] = useState([]);
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+      const responseMeals = await radioAPI.getMeals();
+      setMealsData(responseMeals);
+      const responseDrinks = await radioAPI.getDrinks();
+      setDrinksData(responseDrinks);
+    }
+    fetchMyAPI();
+  }, []);
 
   const isLoginButtonDisabled = () => {
     const MIN_LENGTH = 6;
@@ -86,6 +100,10 @@ function RecipeProvider({ children }) {
     setRecommendationDrink,
     buttonDisabled,
     enableButton,
+    drinksData,
+    setDrinksData,
+    mealsData,
+    setMealsData,
   };
 
   return (
