@@ -46,7 +46,7 @@ function Header(props) {
     if (response !== null && filter !== '') {
       return setMealsData(response.slice(0, maxRecipes));
     }
-    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    global.alert('Sorry, we haven\'t found any recipes for these filters.');
   };
 
   const getDrinks = async () => {
@@ -66,10 +66,11 @@ function Header(props) {
     if (response !== null && filter !== '') {
       return setDrinksData(response.slice(0, maxRecipes));
     }
-    global.alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+    global.alert('Sorry, we haven\'t found any recipes for these filters.');
   };
 
   const handleSubmit = () => {
+    console.log(handleSubmit);
     if (mealsOrDrinks === 'meals') {
       getMeals();
     } else {
