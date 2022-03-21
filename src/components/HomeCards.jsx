@@ -3,9 +3,19 @@ import PropTypes from 'prop-types';
 
 function HomeCards({ index, strMealThumb, strMeal }) {
   return (
-    <div data-testid={ `${index}-recipe-card` }>
-      <img src={ strMealThumb } alt="recipe-card" data-testid={ `${index}-card-img` } />
-      <span data-testid={ `${index}-card-strMeal` }>{strMeal}</span>
+    <div className="container-home" data-testid={ `${index}-recipe-card` }>
+      <img
+        className="favorite-img"
+        src={ strMealThumb }
+        alt="recipe-card"
+        data-testid={ `${index}-card-img` }
+      />
+      <span
+        className="home-name"
+        data-testid={ `${index}-card-strMeal` }
+      >
+        {strMeal}
+      </span>
     </div>
   );
 }

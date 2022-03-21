@@ -12,6 +12,8 @@ import {
   searchByMealCategories,
 } from '../services/InitialFoods';
 
+import '../assets/css/Home.css';
+
 function Home() {
   const { foodsList, setFoodsList } = useContext(RecipeContext);
   const [mealCategories, setMealCategories] = useState([]);
@@ -44,8 +46,9 @@ function Home() {
       { mealsData.length === 1
         && <Redirect to={ `/Home/${mealsData[0].idMeal}` } /> }
       <Header title="Foods" />
-      <div>
+      <section className="container-home-filters">
         <button
+          className="home-all"
           type="button"
           onClick={ handleClickFilter }
           data-testid="All-category-filter"
@@ -56,6 +59,7 @@ function Home() {
           index <= maxNumberButton
           && (
             <button
+              className="home-drink"
               type="button"
               key={ category }
               data-testid={ `${category}-category-filter` }
@@ -64,9 +68,8 @@ function Home() {
               {category}
             </button>)
         ))}
-
-      </div>
-      <div>
+      </section>
+      <section className="container-grid">
         {foodsList.map((food, index) => (index <= maxListSize
         && (
           <Link to={ `/foods/${food.idMeal}` }>
@@ -78,9 +81,9 @@ function Home() {
             />
           </Link>)
         ))}
-      </div>
+      </section>
       { mealsData !== [] && mealsData.map((recipe, index) => (
-        <section className="container-home" key={ recipe.idMeal }>
+        <section className="container-grid" key={ recipe.idMeal }>
           <Link to={ `/Home/${recipe.idMeal}` }>
             <RecipeCard recipe={ recipe } index={ index } />
           </Link>
