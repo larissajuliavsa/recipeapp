@@ -1,19 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function HomeCard({ index, image, name }) {
+function HomeCards({ index, strMealThumb, strMeal }) {
   return (
     <div data-testid={ `${index}-recipe-card` }>
-      <img src={ image } alt="recipe-card" data-testid={ `${index}-card-img` } />
-      <span data-testid={ `${index}-card-name` }>{name}</span>
+      <img src={ strMealThumb } alt="recipe-card" data-testid={ `${index}-card-img` } />
+      <span data-testid={ `${index}-card-strMeal` }>{strMeal}</span>
     </div>
   );
 }
 
-HomeCard.propTypes = {
+HomeCards.propTypes = {
   index: PropTypes.number.isRequired,
-  image: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  strMealThumb: PropTypes.string.isRequired,
+  strMeal: PropTypes.string.isRequired,
 };
 
-export default HomeCard;
+export default HomeCards;

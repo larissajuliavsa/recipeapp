@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import RecipeContext from '../context/RecipeContext';
-import HomeCard from '../components/HomeCards';
+import DrinkCards from '../components/DrinkCards';
 import { maxListSize, maxNumberButton } from '../data/consts';
 import {
   getTwelveDrinks,
@@ -64,11 +64,11 @@ function Drinks() {
         {drinksList.map((drink, index) => (index <= maxListSize
         && (
           <Link to={ `/drinks/${drink.idDrink}` }>
-            <HomeCard
+            <DrinkCards
               key={ drink.idDrink }
               index={ index }
-              image={ drink.strDrinkThumb }
-              name={ drink.strDrink }
+              strDrinkThumb={ drink.strDrinkThumb }
+              strDrink={ drink.strDrink }
             />
           </Link>)
         ))}
