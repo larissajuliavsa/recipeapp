@@ -7,6 +7,9 @@ function RecipeProvider({ children }) {
   const [loginPassword, setLoginPassword] = useState('');
   const [loginButtonDisabled, setLoginButtonDisabled] = useState(true);
 
+  const [foodsList, setFoodsList] = useState([]);
+  const [drinksList, setDrinksList] = useState([]);
+
   const [renderDetailsFood, setRenderDetailsFood] = useState([]);
   const [ingredientsFood, setIngredientsFood] = useState([]);
   const [measureFood, setMeasureFood] = useState([]);
@@ -58,6 +61,10 @@ function RecipeProvider({ children }) {
     loginEmail,
     loginPassword,
     loginButtonDisabled,
+    foodsList,
+    setFoodsList,
+    drinksList,
+    setDrinksList,
     handleChange,
     renderDetailsFood,
     setRenderDetailsFood,
