@@ -1,11 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import React, { useContext } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import RecipeContext from '../context/RecipeContext';
 import RecipeCard from '../components/recipeCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import RecipeContext from '../context/RecipeContext';
 import DrinkCards from '../components/DrinkCards';
 import { maxListSize, maxNumberButton } from '../data/consts';
 import {
@@ -37,7 +35,7 @@ function Drinks() {
   useEffect(() => {
     getDrinks();
   }, []);
-  
+
   const { drinksData } = useContext(RecipeContext);
 
   return (

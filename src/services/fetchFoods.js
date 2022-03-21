@@ -12,9 +12,9 @@ async function getApiByIngredient(ingredient, callback) {
   }
 }
 
-async function getApiByName(nome, callback) {
+async function getApiByName(name, callback) {
   try {
-    const results = await fetch(`${MEAL_BY_NAME}${nome}`).then((res) => res.json());
+    const results = await fetch(`${MEAL_BY_NAME}${name}`).then((res) => res.json());
     callback(results.meals);
   } catch (error) {
     console.error(error);
