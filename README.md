@@ -3,10 +3,6 @@
 <p align="center">Recipe is a mobile app, where the client is able to search, complete and favorite their recipes. In this project, I used data from TheMealDB and CockTailDB API. I developed and presented this project in a group as a Front End final project. We developed tests, css and the hole React structure.
 </p>
 
-<p align="center">
-  <img src="./src/assets/css/img/trybetunes-preview.gif" />
-</p>
-
 <h3 align="left">Skills</h3>
 
 - Use React's Context API to manage state
