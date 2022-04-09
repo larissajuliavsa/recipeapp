@@ -6,9 +6,9 @@
 <h3 align="left">Skills</h3>
 
 - Use React's Context API to manage state
-- Using React Hook useState
-- Using React Hook useContext
-- Using React Hook useEffect
+- Use React Hook useState
+- Use React Hook useContext
+- Use React Hook useEffect
 - Create custom Hooks
 
 <h3 align="left">Connect with me</h3>
