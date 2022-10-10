@@ -1,6 +1,10 @@
-<h1 align="center">Recipe App</h1>
+<h1 align="center">🍝 Recipe App</h1>
 
 <p align="center">Recipe is a mobile app, where the client is able to search, complete and favorite their recipes. In this project, I used data from TheMealDB and CockTailDB API. I developed and presented this project in a group as a Front End final project. We developed tests, css and the hole React structure. I just need to warn you that it's not done yet, but soon as possible I'm going to upload the latest version.
+</p>
+
+<p align="center">
+  <img src="src/images/preview-recipeapp.gif" />
 </p>
 
 <h3 align="left">Skills</h3>
