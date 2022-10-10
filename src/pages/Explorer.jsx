@@ -12,7 +12,7 @@ function Explorer({ history }) {
   return (
     <div>
       <Header title="Explore" />
-      <span>Tela Explore na rota /explorer</span>
+      {/* <span>Tela Explore na rota /explorer</span> */}
       <section className="container-explorer">
         <button
           className="explorer-foods"

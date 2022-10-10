@@ -46,7 +46,7 @@ function ExplorerTypes(props) {
         <img src={ backIcon } alt="Back to explore" />
         <p className="btn-explore-name">Explore</p>
       </button>
-      <span>Tela ExploreTypes na rota /explorer/:foodsAndDrinks</span>
+      {/* <span>Tela ExploreTypes na rota /explorer/:foodsAndDrinks</span> */}
       <section className="container-types">
         <button
           className="types-ingredient"
